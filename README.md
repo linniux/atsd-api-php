@@ -35,8 +35,7 @@ It has the ability to read time-series values, statistics, properties, alerts, a
 
 
 ## Getting Started
-Before you begin Installing ATSD Client for PHP, you need to install a copy of the [Axibase Time-Series Database][atsd].
-Download the latest version of ATSD available for your Linux distribution.
+Before you begin installing ATSD Client for PHP, you need to install a copy of the [Axibase Time-Series Database][atsd]. Download the latest version of ATSD that is available for your Linux distribution.
 
 Minimum requirements for running the ATSD Client: PHP 5.3.2+
 
