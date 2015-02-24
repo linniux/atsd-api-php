@@ -61,6 +61,8 @@ Inside of composer.json specify the following:
 ## Examples
 
 See
+[AtsdClientBasicExample][atsd-basic-example]
+
 [AtsdClientAlertsExample][atsd-alerts-example]
 
 [AtsdClientAlertsHistoryExample][atsd-alertsHistory-example]
@@ -76,7 +78,6 @@ See
 [AtsdClientPropertiesExample][atsd-properties-example]
 
 [AtsdClientSeriesExample][atsd-series-example]
-[AtsdClientBasicExample][atsd-basic-example]
 
 ### Client Configuration
 
