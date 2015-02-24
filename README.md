@@ -1,15 +1,14 @@
 # Axibase Time-Series Database Client for PHP
 
-The **ATSD Client for PHP** enables PHP developers to easily read and write statistics and metadata from
-[Axibase Time-Series Database][atsd]. Build reporting, analytics, and alerting solutions with minimal effort.
-Get started using this API for PHP using [Composer][axibase_atsd-api-php] .
+The **ATSD Client for PHP** enables PHP developers to easily read and write statistics and metadata from the 
+[Axibase Time-Series Database][atsd]. With minimal effort, you can build reporting, analytics, and alerting solutions. Use [Composer][axibase_atsd-api-php] to get started with this PHP API.
 
 * [Documentation][atsd-api]
 * [Issues][atsd-issues]
 
 ## Implemented Methods
 
-**The ATSD Client for PHP** provides an easy-to-use client for interfacing with **ATSD** metadata and data REST API services.
+**The ATSD Client for PHP** in an easy-to-use client for interfacing with **ATSD** metadata and data REST API services.
 It has the ability to read time-series values, statistics, properties, alerts, and messages.
 
 - Data API
@@ -36,12 +35,12 @@ It has the ability to read time-series values, statistics, properties, alerts, a
 
 
 ## Getting Started
-Installing ATSD - Before you begin, you need to install your own copy of the [Axibase Time-Series Database][atsd].
+Before you begin Installing ATSD Client for PHP, you need to install a copy of the [Axibase Time-Series Database][atsd].
 Download the latest version of ATSD available for your Linux distribution.
 
-Minimum requirements - PHP 5.3.2+ is needed to run the ATSD Client.
+Minimum requirements for running the ATSD Client: PHP 5.3.2+
 
-Installing the ATSD Client
+Installing the ATSD Client:
 
 ```
 git clone https://github.com/axibase/atsd-api-php.git
@@ -50,7 +49,7 @@ cd /{you_documentroot_folder}/atsd-api-php/examples
 firefox *.php
 ```
 ## Composer
-Inside of composer.json specify the following:
+Once in composer.json, specify the following:
 ```
 {
 "require": {
@@ -60,7 +59,7 @@ Inside of composer.json specify the following:
 ```
 ## Examples
 
-See
+See:
 [AtsdClientBasicExample][atsd-basic-example]
 
 [AtsdClientAlertsExample][atsd-alerts-example]
@@ -147,14 +146,13 @@ $client->close();
 
 ### Troubleshooting
 
-If you get an error like
+If you get an error like the following, ensure that the variable date.timezone in your php.ini is set.
 ```
 Fatal error: Uncaught exception 'Exception' with message 'DateTime::__construct():
 It is not safe to rely on the system's timezone settings. You are required to use the date.timezone setting or the date_default_timezone_set() function.
 In case you used any of those methods and you are still getting this warning, you most likely misspelled the timezone identifier.
 We selected the timezone 'UTC' for now, but please set date.timezone to select your timezone.' 
 ```
-ensure that the variable date.timezone in your php.ini is set.
 
 [atsd]:https://axibase.com/products/axibase-time-series-database/
 [atsd-api]:https://axibase.com/products/axibase-time-series-database/reading-data/php/
