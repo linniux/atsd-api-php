@@ -24,14 +24,17 @@ class EntityAndTags  extends AtsdClient {
         parent::__construct($client);
     }
 
-    function find($metric, $entity = "") {
+    function find($metric, $entity = null) {
         $this->queryUri = str_replace('[[metric]]', urlencode($metric), EntityAndTags::URI);
-        $this->applyGetParameters(array($entity));
+        if($entity) {
+            $this->applyGetParameters(array("entity" => $entity));
+        }
         return $this->query($this->queryUri . $this->getParams);
 
     }
 
     private function applyGetParameters($getParameters) {
+        $this->getParams = "";
         $this->getParams = http_build_query($getParameters);
     }
 }

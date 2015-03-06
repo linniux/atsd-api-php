@@ -29,7 +29,7 @@ $entity = "awsswgvml001";
 
 $properties = new Properties($client);
 
-$json = '{"params":[{"type":"' . $type . '","entity":"' . $entity . '"}]}';
+$json = '{"queries":[{"type":"' . $type . '","entity":"' . $entity . '"}]}';
 $propertiesResponse = $properties->find(json_decode($json));
 
 $viewConfig = new ViewConfiguration("Properties for entity: " . $entity . "; type: " . $type, "properties");

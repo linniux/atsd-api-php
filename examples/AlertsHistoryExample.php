@@ -24,12 +24,13 @@ $iniArray = parse_ini_file("atsd.ini");
 $client = new HttpClient();
 $client->connect($iniArray["url"], $iniArray["username"], $iniArray["password"]);
 
-$entity = "awsswgvml001";
+$entity = "awsswgvml001"; 
 $limit = 5;
+
 
 $alertHistory = new AlertsHistory($client);
 
-$jsonObj = json_decode('{"entity":"' . $entity . '", "limit":"' . $limit . '"}');
+$jsonObj = json_decode('{"queries": [{"entity": "' . $entity . '", "limit":"' . $limit . '"}]}');
 $alertHistoryResponse = $alertHistory->findHistory($jsonObj);
 
 $viewConfig = new ViewConfiguration("Alerts history for entity: " . $entity . "; limit: " . $limit, "alertsHistory", array('severity' => 'severity', 'alertOpenTime' => 'unixtimestamp', 'receivedTime' => 'unixtimestamp', 'time' => 'unixtimestamp'));

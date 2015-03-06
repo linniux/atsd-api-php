@@ -24,13 +24,9 @@ class Alerts  extends AtsdClient {
         parent::__construct($client);
     }
 
-    function find($getParameters = array()) {
+    function find($jsonRequest) {
         $this->queryUri = Alerts::URI;
-        $this->applyGetParameters($getParameters);
+        $this->postParams = $jsonRequest;
         return $this->query($this->queryUri . $this->getParams);
-    }
-
-    private function applyGetParameters($getParameters) {
-        $this->getParams = http_build_query($getParameters);
     }
 }

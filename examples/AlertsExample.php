@@ -24,12 +24,13 @@ $iniArray = parse_ini_file("atsd.ini");
 $client = new HttpClient();
 $client->connect($iniArray["url"], $iniArray["username"], $iniArray["password"]);
 
-$entity = "awsswgvml001";
+$entity = "nurswgvml006";
 
 $alerts = new Alerts($client);
 
-$params = array("entity" => $entity);
-$alertsResponse = $alerts->find($params);
+$jsonObj = json_decode('{"queries": [{"entities": ["' . $entity . '"]}]}');
+
+$alertsResponse = $alerts->find($jsonObj);
 
 $viewConfig = new ViewConfiguration("Alerts for entity: " . $entity, "alerts", array('severity' => 'severity', 'openTime' => 'unixtimestamp', 'lastEventTime' => 'unixtimestamp'));
 $tbl = Utils::arrayAsHtmlTable($alertsResponse, $viewConfig);

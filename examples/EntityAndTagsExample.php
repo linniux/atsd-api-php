@@ -32,6 +32,12 @@ $entityAndTagsResponse = $entityAndTags->find($metric);
 $viewConfig = new ViewConfiguration('Entity and Tags for:' . $metric, 'entityAndTags', array('lastInsertTime' => 'unixtimestamp'));
 $eattable = Utils::arrayAsHtmlTable($entityAndTagsResponse, $viewConfig);
 
-Utils::render(array($eattable));
+$entity = "awsswgvml001";
+$entityAndTagsResponseEntity = $entityAndTags->find($metric, $entity);
+
+$viewConfig = new ViewConfiguration('Entity and Tags for metric:' . $metric . ', entity: ' . $entity, 'entityAndTags', array('lastInsertTime' => 'unixtimestamp'));
+$eattableEntity = Utils::arrayAsHtmlTable($entityAndTagsResponseEntity, $viewConfig);
+
+Utils::render(array($eattable, $eattableEntity));
 
 $client->close();

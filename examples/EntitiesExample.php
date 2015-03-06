@@ -24,8 +24,8 @@ $iniArray = parse_ini_file("atsd.ini");
 $client = new HttpClient();
 $client->connect($iniArray["url"], $iniArray["username"], $iniArray["password"]);
 
-$expression = 'name like \'nurs*\'';
-$tags = 'app, os';
+$expression = 'name like \'nurs*\''; 
+$tags = 'app, os'; 
 $limit = 10;
 
 $entities = new Entities($client);
@@ -36,7 +36,14 @@ $entitiesResponse = $entities->findAll($params);
 $viewConfig = new ViewConfiguration('Entities for expression: ' . $expression . "; tags: " . $tags . "; limit: " . $limit, 'entities', array('lastInsertTime' => 'unixtimestamp'));
 $entitiesTable = Utils::arrayAsHtmlTable($entitiesResponse, $viewConfig);
 
-Utils::render(array($entitiesTable));
+
+$entity = "awsswgvml001";
+$entityResponse = $entities->find($entity);
+
+$viewConfig = new ViewConfiguration('Entity: ' . $entity, "entity");
+$entityTable = Utils::arrayAsHtmlTable(array($entityResponse), $viewConfig);
+
+Utils::render(array($entitiesTable, $entityTable));
 
 
 $client->close();
