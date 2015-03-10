@@ -27,13 +27,13 @@ $client->connect($iniArray["url"], $iniArray["username"], $iniArray["password"])
 $type = "System";
 $entity = "awsswgvml001";
 
-$properties = new Properties($client);
+$queryClient = new Properties($client);
 
 $json = '{"queries":[{"type":"' . $type . '","entity":"' . $entity . '"}]}';
-$propertiesResponse = $properties->find(json_decode($json));
+$response = $queryClient->find(json_decode($json));
 
 $viewConfig = new ViewConfiguration("Properties for entity: " . $entity . "; type: " . $type, "properties");
-$propertiesTable = Utils::propertyAsHtmlTable($propertiesResponse, $viewConfig);
+$propertiesTable = Utils::propertyAsHtmlTable($response, $viewConfig);
 
 Utils::render(array($propertiesTable));
 $client->close();

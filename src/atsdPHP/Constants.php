@@ -17,35 +17,38 @@
 namespace axibase\atsdPHP;
 
 abstract class TimeUnit {
-    const YEAR = 'year';
-    const QUARTER = 'quarter';
-    const MONTH = 'month';
-    const WEEK = 'week';
-    const DAY = 'day';
-    const HOUR = 'hour';
-    const MINUTE = 'minute';
-    const SECOND = 'second';
+    const YEAR = 'YEAR';
+    const QUARTER = 'QUARTER';
+    const MONTH = 'MONTH';
+    const WEEK = 'WEEK';
+    const DAY = 'DAY';
+    const HOUR = 'HOUR';
+    const MINUTE = 'MINUTE';
+    const SECOND = 'SECOND';
 }
 
 abstract class AggregateType {
-    const DETAIL = 'detail';
-    const AVG = 'avg';
-    const MAX = 'max';
-    const MIN = 'min';
-    const COUNT = 'count';
-    const SUM = 'sum';
-    const PERCENTILE_999 = 'percentile_999';
-    const PERCENTILE_995 = 'percentile_995';
-    const PERCENTILE_99 = 'percentile_99';
-    const PERCENTILE_95 = 'percentile_95';
-    const PERCENTILE_90 = 'percentile_90';
-    const PERCENTILE_75 = 'percentile_75';
-    const PERCENTILE_50 = 'percentile_50';
-    const STANDARD_DEVIATION = 'standard_deviation';
-    const FIRST = 'first';
-    const LAST = 'last';
-    const DELTA = 'delta';
-    const WAVG = 'wavg';
-    const WTAVG = 'wtavg';
+    const DETAIL = 'DETAIL';
+    const AVG = 'AVG';
+    const MAX = 'MAX';
+    const MIN = 'MIN';
+    const COUNT = 'COUNT';
+    const SUM = 'SUM';
+    const PERCENTILE_999 = 'PERCENTILE_999';
+    const PERCENTILE_995 = 'PERCENTILE_995';
+    const PERCENTILE_99 = 'PERCENTILE_99';
+    const PERCENTILE_95 = 'PERCENTILE_95';
+    const PERCENTILE_90 = 'PERCENTILE_90';
+    const PERCENTILE_75 = 'PERCENTILE_75';
+    const PERCENTILE_50 = 'PERCENTILE_50';
+    const STANDARD_DEVIATION = 'STANDARD_DEVIATION';
+    const FIRST = 'FIRST';
+    const LAST = 'LAST';
+    const DELTA = 'DELTA';
+    const WAVG = 'WAVG';
+    const WTAVG = 'WTAVG';
+    const THRESHOLD_COUNT = "THRESHOLD_COUNT";
+    const THRESHOLD_DURATION = "THRESHOLD_DURATION";
+    const THRESHOLD_PERCENT = "THRESHOLD_PERCENT";
 }
 

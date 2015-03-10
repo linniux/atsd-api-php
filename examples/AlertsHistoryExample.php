@@ -28,13 +28,13 @@ $entity = "awsswgvml001";
 $limit = 5;
 
 
-$alertHistory = new AlertsHistory($client);
+$queryClient = new AlertsHistory($client);
 
 $jsonObj = json_decode('{"queries": [{"entity": "' . $entity . '", "limit":"' . $limit . '"}]}');
-$alertHistoryResponse = $alertHistory->findHistory($jsonObj);
+$response = $queryClient->findHistory($jsonObj);
 
 $viewConfig = new ViewConfiguration("Alerts history for entity: " . $entity . "; limit: " . $limit, "alertsHistory", array('severity' => 'severity', 'alertOpenTime' => 'unixtimestamp', 'receivedTime' => 'unixtimestamp', 'time' => 'unixtimestamp'));
-$tbl = Utils::arrayAsHtmlTable($alertHistoryResponse, $viewConfig);
+$tbl = Utils::arrayAsHtmlTable($response, $viewConfig);
 
 Utils::render(array($tbl));
 $client->close();

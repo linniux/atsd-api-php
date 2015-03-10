@@ -27,10 +27,10 @@ $client->connect($iniArray['url'], $iniArray['username'], $iniArray['password'])
 $expression = 'name like \'nmon*\'';
 $limit = 10;
 
-$metrics = new Metrics($client);
+$queryClient = new Metrics($client);
 
 $params = array('limit' => $limit, 'expression' => $expression);
-$metricsResponse = $metrics->findAll($params);
+$metricsResponse = $queryClient->findAll($params);
 
 var_dump($metricsResponse);
 $client->close();

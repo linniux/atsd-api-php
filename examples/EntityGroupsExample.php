@@ -27,20 +27,20 @@ $client->connect($iniArray["url"], $iniArray["username"], $iniArray["password"])
 
 $limit = 15;
 
-$entityGroups = new EntityGroups($client);
+$queryClient = new EntityGroups($client);
 
 $params = array("limit" => $limit);
-$groups = $entityGroups->findAll($params);
+$response = $queryClient->findAll($params);
 
 $viewConfig = new ViewConfiguration("Entity groups, limit:" . $limit, 'entGroups');
-$groupsTbl = Utils::arrayAsHtmlTable($groups, $viewConfig);
+$groupsTbl = Utils::arrayAsHtmlTable($response, $viewConfig);
 
 $group = "nmon-linux";
-$entities = new Entities($client);
-$entitiesForGroup = $entities->findForGroup($group);
+$queryClientEntities = new Entities($client);
+$responseGroup = $queryClientEntities->findForGroup($group);
 
 $viewConfigGroup = new ViewConfiguration('Entities for group: ' . $group , 'entForGroup', array('lastInsertTime' => 'unixtimestamp'));
-$entitiesForGroupTable = Utils::arrayAsHtmlTable($entitiesForGroup, $viewConfigGroup);
+$entitiesForGroupTable = Utils::arrayAsHtmlTable($responseGroup, $viewConfigGroup);
 
 Utils::render(array($groupsTbl, $entitiesForGroupTable));
 $client->close();

@@ -28,20 +28,20 @@ $expression = 'name like \'nurs*\'';
 $tags = 'app, os'; 
 $limit = 10;
 
-$entities = new Entities($client);
+$queryClient = new Entities($client);
 
 $params = array("limit" => $limit, 'expression' => $expression, 'tags' => $tags );
-$entitiesResponse = $entities->findAll($params);
+$responseEntities = $queryClient->findAll($params);
 
 $viewConfig = new ViewConfiguration('Entities for expression: ' . $expression . "; tags: " . $tags . "; limit: " . $limit, 'entities', array('lastInsertTime' => 'unixtimestamp'));
-$entitiesTable = Utils::arrayAsHtmlTable($entitiesResponse, $viewConfig);
+$entitiesTable = Utils::arrayAsHtmlTable($responseEntities, $viewConfig);
 
 
 $entity = "awsswgvml001";
-$entityResponse = $entities->find($entity);
+$responseEntity = $queryClient->find($entity);
 
 $viewConfig = new ViewConfiguration('Entity: ' . $entity, "entity");
-$entityTable = Utils::arrayAsHtmlTable(array($entityResponse), $viewConfig);
+$entityTable = Utils::arrayAsHtmlTable(array($responseEntity), $viewConfig);
 
 Utils::render(array($entitiesTable, $entityTable));
 

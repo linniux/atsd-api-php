@@ -35,16 +35,16 @@ class Utils {
        return static::$severities[$sevetitycode];
     }
 
-    static function seriesAsHtml($seriesArray) {
+    static function seriesAsHtml($series) {
         $output = '';
-        foreach ($seriesArray as $series) {
+        foreach ($series as $series) {
 
             $body = array_reduce($series['data'], 'self::concat');
             if (count($series['data']) == 0) {
                 $body = '<tr><td>Empty</td></tr>';
             }
 
-            $output .= "<h2>" . $series['id'] . "</h2>
+            $output .= "<h2>" . $series['requestId'] . "</h2>
             <table><thead><tr><th>time</th><th>value</th></tr></thead>" .
                 "<tbody>{$body}</tbody>" .
                 "</table>";

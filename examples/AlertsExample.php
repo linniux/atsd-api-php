@@ -26,14 +26,14 @@ $client->connect($iniArray["url"], $iniArray["username"], $iniArray["password"])
 
 $entity = "nurswgvml006";
 
-$alerts = new Alerts($client);
+$queryClient = new Alerts($client);
 
 $jsonObj = json_decode('{"queries": [{"entities": ["' . $entity . '"]}]}');
 
-$alertsResponse = $alerts->find($jsonObj);
+$response = $queryClient->find($jsonObj);
 
 $viewConfig = new ViewConfiguration("Alerts for entity: " . $entity, "alerts", array('severity' => 'severity', 'openTime' => 'unixtimestamp', 'lastEventTime' => 'unixtimestamp'));
-$tbl = Utils::arrayAsHtmlTable($alertsResponse, $viewConfig);
+$tbl = Utils::arrayAsHtmlTable($response, $viewConfig);
 
 Utils::render(array($tbl));
 $client->close();

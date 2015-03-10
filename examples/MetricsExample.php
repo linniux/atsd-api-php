@@ -27,13 +27,13 @@ $client->connect($iniArray['url'], $iniArray['username'], $iniArray['password'])
 $expression = 'name like \'nmon*\'';
 $limit = 10;
 
-$metrics = new Metrics($client);
+$queryClient = new Metrics($client);
 
 $params = array('limit' => $limit, 'expression' => $expression);
-$metricsResponse = $metrics->findAll($params);
+$response = $queryClient->findAll($params);
 
 $viewConfig = new ViewConfiguration('Metrics for expression: ' . $expression . "; limit: " . $limit, 'metrics', array('lastInsertTime' => 'unixtimestamp'));
-$MetricsTbl = Utils::arrayAsHtmlTable($metricsResponse, $viewConfig);
+$MetricsTbl = Utils::arrayAsHtmlTable($response, $viewConfig);
 
 Utils::render(array($MetricsTbl));
 $client->close();

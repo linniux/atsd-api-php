@@ -24,19 +24,19 @@ $iniArray = parse_ini_file("atsd.ini");
 $client = new HttpClient();
 $client->connect($iniArray["url"], $iniArray["username"], $iniArray["password"]);
 
-$entityAndTags = new EntityAndTags($client);
+$queryClient = new EntityAndTags($client);
 
 $metric = "disk_used_percent";
-$entityAndTagsResponse = $entityAndTags->find($metric);
+$responseByMetric = $queryClient->find($metric);
 
 $viewConfig = new ViewConfiguration('Entity and Tags for:' . $metric, 'entityAndTags', array('lastInsertTime' => 'unixtimestamp'));
-$eattable = Utils::arrayAsHtmlTable($entityAndTagsResponse, $viewConfig);
+$eattable = Utils::arrayAsHtmlTable($responseByMetric, $viewConfig);
 
-$entity = "awsswgvml001";
-$entityAndTagsResponseEntity = $entityAndTags->find($metric, $entity);
+$entity = "nurswgvml006";
+$reponseByMetricEntity = $queryClient->find($metric, $entity);
 
 $viewConfig = new ViewConfiguration('Entity and Tags for metric:' . $metric . ', entity: ' . $entity, 'entityAndTags', array('lastInsertTime' => 'unixtimestamp'));
-$eattableEntity = Utils::arrayAsHtmlTable($entityAndTagsResponseEntity, $viewConfig);
+$eattableEntity = Utils::arrayAsHtmlTable($reponseByMetricEntity, $viewConfig);
 
 Utils::render(array($eattable, $eattableEntity));
 

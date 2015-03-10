@@ -17,181 +17,102 @@ namespace axibase\atsdPHP;
 
 class Series extends AtsdClient{
     const URL = "/series";
-    private $startTime;
-    private $endTime;
-    private $seriesKeyIdMap;
-    private $seriesKeyIndexMap;
+    private $seriesKeys;
+    private $queries;
     private $series;
-    /**
-     * @param ConnectionManager $client object for connect to server
-     * @param int $startTime start interval time in millis
-     * @param int $endTime end interval time in millis
-     * @throws \Exception
-     */
-    function __construct($client, $startTime, $endTime) {
+    private $currentQuery;
+
+    function __construct($client) {
         parent::__construct($client);
-        $this->startTime = $startTime;
-        $this->endTime = $endTime;
-        $this->postParams = [];
-        $this->seriesKeyIdMap = array();
-        $this->seriesKeyIndexMap = array();
+        $this->postParams = array();
+        $this->seriesKeys = array();
+        $this->queries = array();
+        $this->currentQuery = array();
     }
 
-    /**
-     * @param string $key series map key
-     * @param string $entity
-     * @param string $metric
-     * @param array $tags map of tags arrays (Example: array('tag1' => ['val1', 'val2'], 'tag2' => ['val3'])
-     * @return $this
-     */
-    public function addDetailSeries($key, $entity, $metric, $tags = null) {
-        $this->addSeries($key, array(
-            'entity' => $entity,
-            'metric' => $metric,
-            'tags' => $tags,
-            'type' => AggregateType::DETAIL
-        ));
+    public function addAggregateQuery($entity, $metric, $startTime, $endTime, $aggregator, $tags = array()) {
+        $optional["aggregate"] = $aggregator->asArray();
+        $optional["tags"] = $tags;
+        $optional["startTime"] = $startTime;
+        $optional["endTime"] = $endTime;
+        $this->addQuery($entity, $metric, $optional);
         return $this;
     }
 
-    /**
-     * @param string $key series map key
-     * @param string $entity
-     * @param string $metric
-     * @param array $tags map of tags arrays (Example: array('tag1' => ['val1', 'val2'], 'tag2' => ['val3'])
-     * @param string $type AggregateType::Value aggregate type constant
-     * @param int $intervalCount
-     * @param string $intervalUnit TimeUnit::Value time constant
-     * @return $this
-     */
-    public function addAggregateSeries($key, $entity, $metric, $tags, $type, $intervalCount, $intervalUnit) {
-        $this->addSeries($key, array(
-            'entity' => $entity,
-            'metric' => $metric,
-            'tags' => $tags,
-            'type' => $type,
-            'intervalCount' => $intervalCount,
-            'intervalUnit' => $intervalUnit
-        ));
+    public function addDetailQuery($entity, $metric, $startTime, $endTime, $tags = array()) {
+        $optional = array();
+        $optional["tags"] = $tags;
+        $optional["startTime"] = $startTime;
+        $optional["endTime"] = $endTime;
+        $this->addQuery($entity, $metric, $optional);
         return $this;
     }
 
-    /**
-     * @param string $key series map key
-     * @param array $reqMap
-     * Example:
-     * <code>
-     * array(
-     *  'entity' => 'NURSWGVML007',
-     *  'metric' => 'disk_used',
-     *  'tags' => array(
-     *      'mount_point' => ['*']
-     *  ),
-     *  'type' => Type::SUM,
-     *  'intervalCount' => 1,
-     *  'intervalUnit' => TimeUnit::HOUR,
-     *  'rateCount' => 1,
-     *  'rateUnit' => TimeUnit::HOUR,
-     *  'statistics' => 'forecast',
-     *  'multipleSeries' => false
-     * )
-     * </code>
-     *
-     * @return $this
-     */
-    public function addSeries($key, $reqMap) {
-        $standardReqMap = $this->toStandardReqMap($reqMap);
-
-        $requestId = $this->buildRequestId($standardReqMap);
-        $this->seriesKeyIdMap[$key] = $requestId;
-        if (array_key_exists($key, $this->seriesKeyIndexMap)) {
-            $this->postParams[$this->seriesKeyIndexMap[$key]] = $standardReqMap;
-        } else {
-            $this->postParams[] = $standardReqMap;
-        }
-        return $this;
-    }
-
-    public function execQuery() {
-        $query = array(
-            'startTime' => $this->startTime,
-            'endTime' => $this->endTime,
-            'json' => true
-        );
-        $response = $this->query(Series::URL . '?' . http_build_query($query));
-        $this->series = $response;
-    }
-
-    public function getStartTime() {
-        return $this->startTime;
-    }
-
-    public function setStartTime($startTime) {
-        $this->startTime = $startTime;
-    }
-
-    public function getEndTime() {
-        return $this->endTime;
-    }
-
-    public function setEndTime($endTime) {
-        $this->endTime = $endTime;
-    }
-
-    private function toStandardReqMap($reqMap) {
-        $standardReqMap = $reqMap;
-        $standardReqMap['entity'] = strtolower($reqMap['entity']);
-        $standardReqMap['metric'] = strtolower($reqMap['metric']);
-        if (array_key_exists('tags', $reqMap)) {
-            $lowerNamesTags = array();
-            foreach ($reqMap['tags'] as $tagName => $tagValues) {
-                $lowerNamesTags[strtolower($tagName)] = $tagValues;
-            }
-            $standardReqMap['tags'] = $lowerNamesTags;
-        }
-        $standardReqMap['multipleSeries'] = (array_key_exists('multipleSeries', $reqMap) && $reqMap['multipleSeries'] == false) ? 'false' : 'true';
-        return $standardReqMap;
-    }
-
-    private function buildRequestId($standardReqMap) {
-        $requestId = $standardReqMap['entity'] . ":" .
-            $standardReqMap['metric'] . ":" .
-            $this->tagsToIdPart($standardReqMap['tags']) . ":" .
-            $standardReqMap['type'];
-        if (array_key_exists('intervalUnit', $standardReqMap) && array_key_exists('intervalCount', $standardReqMap)) {
-            $requestId .= ":" . $standardReqMap['intervalCount'] . "=" . $standardReqMap['intervalUnit'];
-        }
-        if (array_key_exists('rateUnit', $standardReqMap) && array_key_exists('rateCount', $standardReqMap)) {
-            $requestId .= ":" . $standardReqMap['rateCount'] . "=" . $standardReqMap['rateUnit'];
-        }
-        if (array_key_exists('statistics', $standardReqMap)) {
-            $requestId .= ":forecast";
-        }
-        $requestId .= ':multipleSeries=' . $standardReqMap['multipleSeries'];
-        return $requestId;
-    }
-
-    private function tagsToIdPart($tags) {
-        $string = '';
-        if ($tags != null) {
-            foreach ($tags as $tagName => $tagValues) {
-                foreach ($tagValues as $tagValue) {
-                    $string .= $tagName . "=" . $tagValue . ",";
-                }
+    public function addQuery($entity, $metric, $optional = array()) {
+        if(array_key_exists("tags", $optional)) {
+            if(count($optional["tags"]) == 0) {
+                unset($optional["tags"]);
             }
         }
-        return rtrim($string, ",");
+        $this->currentQuery["requestId"] = count($this->queries);
+        $this->currentQuery["entity"] = $entity;
+        $this->currentQuery["metric"] = $metric;
+        foreach($optional as $key => $option) {
+            $this->currentQuery[$key] = $option;
+        }
+        $this->queries[] = $this->currentQuery;
+        $this->currentQuery = array();
+        return $this;
     }
+
+    public function execQueries() {
+        $this->postParams = array("queries" => $this->queries);
+        $response = $this->query(Series::URL);
+        foreach($response['series'] as $key => $value) {
+            $this->series[$value["requestId"]] = $value;
+        }
+        $this->queries = array();
+        return $this->series;
+    }
+
 
     public function getSeries($key) {
-        $series = [];
-        foreach ($this->series as $s) {
-            if ($s['requestId'] == $this->seriesKeyIdMap[$key]) {
-                $series[] = $s;
+        if(array_key_exists($key, $this->series)) {
+            return $this->series[$key];
+        } else {
+            return array();
+        }
+    }
+}
+
+class Aggregator {
+    public $types;
+    public $interval;
+    public $interpolate;
+    public $threshold;
+    public $calendar;
+    public $workingMinutes;
+
+    function __construct($types, $interval, $interpolate = "", $threshold = "", $calendar = "", $workingMinutes = "") {
+        $this->types = $types;
+        $this->interval = $interval;
+        $this->interpolate = $interpolate;
+        $this->threshold = $threshold;
+        $this->calendar = $calendar;
+        $this->workingMinutes = $workingMinutes;
+    }
+
+    function asArray() {
+        $arr = array();
+        foreach($this as $key => $value) {
+            if("" != $value) {
+                $arr[$key] = $value;
             }
         }
-        return $series;
+        return $arr;
     }
+
+
 }
 
 
