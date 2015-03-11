@@ -69,7 +69,7 @@ class Series extends AtsdClient{
         $this->postParams = array("queries" => $this->queries);
         $response = $this->query(Series::URL);
         foreach($response['series'] as $value) {
-            $this->series[$value["requestId"]] = $value;
+            $this->series[$value["requestId"]][] = $value;
         }
         $this->queries = array();
         return $this->series;

@@ -34,9 +34,9 @@ $queryClient->addQuery("nurswgvml007", "cpu_busy", array("limit" => "4"));
 $response = $queryClient->execQueries();
 
 $tables = array();
-$tables[] = Utils::seriesAsHtml(array($response[0]), "detail series");
-$tables[] = Utils::seriesAsHtml(array($response[1]), "aggregate series");
-$tables[] = Utils::seriesAsHtml(array($response[2]), "custom series");
+$tables[] = Utils::seriesAsHtml($response[0], "detail series");
+$tables[] = Utils::seriesAsHtml($response[1], "aggregate series");
+$tables[] = Utils::seriesAsHtml($response[2], "custom series");
 
 Utils::render($tables);
 $client->close();
