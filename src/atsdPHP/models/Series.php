@@ -55,8 +55,8 @@ class Series extends AtsdClient{
             }
         }
         $this->currentQuery["requestId"] = count($this->queries);
-        $this->currentQuery["entity"] = $entity;
-        $this->currentQuery["metric"] = $metric;
+        $this->currentQuery["entity"] = urlencode($entity);
+        $this->currentQuery["metric"] = urlencode($metric);
         foreach($optional as $key => $option) {
             $this->currentQuery[$key] = $option;
         }
@@ -68,7 +68,7 @@ class Series extends AtsdClient{
     public function execQueries() {
         $this->postParams = array("queries" => $this->queries);
         $response = $this->query(Series::URL);
-        foreach($response['series'] as $key => $value) {
+        foreach($response['series'] as $value) {
             $this->series[$value["requestId"]] = $value;
         }
         $this->queries = array();

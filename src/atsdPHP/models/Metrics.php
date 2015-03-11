@@ -17,7 +17,8 @@
 namespace axibase\atsdPHP;
 
 class Metrics  extends AtsdClient {
-    const URI = '/metrics';
+    const URI = '/metrics?';
+    const METRIC_URI = '/metrics/[[metric]]?';
     protected $queryUri;
 
     function __construct($client) {
@@ -26,13 +27,15 @@ class Metrics  extends AtsdClient {
     }
 
     function findAll($getParameters = array()) {
+        $this->queryUri = Metrics::URI;
         $this->applyGetParameters($getParameters);
-        return $this->query($this->queryUri . '?' . $this->getParams);
+        return $this->query($this->queryUri . $this->getParams);
     }
 
-    function find($name, $getParameters = array()) {
+    function find($metric, $getParameters = array()) {
+        $this->queryUri = str_replace('[[metric]]', urlencode($metric), Metrics::METRIC_URI);
         $this->applyGetParameters($getParameters);
-        return $this->query($this->queryUri . "/" . urlencode($name) . '?' . $this->getParams);
+        return $this->query($this->queryUri . $this->getParams);
 
     }
 

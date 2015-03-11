@@ -29,7 +29,6 @@ $entity = "nurswgvml006";
 $queryClient = new Alerts($client);
 
 $jsonObj = json_decode('{"queries": [{"entities": ["' . $entity . '"]}]}');
-
 $response = $queryClient->find($jsonObj);
 
 $viewConfig = new ViewConfiguration("Alerts for entity: " . $entity, "alerts", array('severity' => 'severity', 'openTime' => 'unixtimestamp', 'lastEventTime' => 'unixtimestamp'));

@@ -27,7 +27,6 @@ $client->connect($iniArray["url"], $iniArray["username"], $iniArray["password"])
 $entity = "awsswgvml001"; 
 $limit = 5;
 
-
 $queryClient = new AlertsHistory($client);
 
 $jsonObj = json_decode('{"queries": [{"entity": "' . $entity . '", "limit":"' . $limit . '"}]}');

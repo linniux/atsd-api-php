@@ -25,7 +25,7 @@ $iniArray = parse_ini_file("atsd.ini");
 $client = new HttpClient();
 $client->connect($iniArray["url"], $iniArray["username"], $iniArray["password"]);
 
-$limit = 15;
+$limit = 8;
 
 $queryClient = new EntityGroups($client);
 
@@ -36,11 +36,17 @@ $viewConfig = new ViewConfiguration("Entity groups, limit:" . $limit, 'entGroups
 $groupsTbl = Utils::arrayAsHtmlTable($response, $viewConfig);
 
 $group = "nmon-linux";
+$responseGroup = $queryClient->find($group);
+
+$viewConfigGroup = new ViewConfiguration('Group: ' . $group, 'group');
+$groupsTable = Utils::arrayAsHtmlTable(array($responseGroup), $viewConfigGroup);
+
 $queryClientEntities = new Entities($client);
-$responseGroup = $queryClientEntities->findForGroup($group);
+$responseEntities = $queryClientEntities->findForGroup($group);
 
-$viewConfigGroup = new ViewConfiguration('Entities for group: ' . $group , 'entForGroup', array('lastInsertTime' => 'unixtimestamp'));
-$entitiesForGroupTable = Utils::arrayAsHtmlTable($responseGroup, $viewConfigGroup);
+$viewConfigEntities = new ViewConfiguration('Entities for group: ' . $group , 'entForGroup', array('lastInsertTime' => 'unixtimestamp'));
+$entitiesForGroupTable = Utils::arrayAsHtmlTable($responseEntities, $viewConfigEntities);
 
-Utils::render(array($groupsTbl, $entitiesForGroupTable));
+
+Utils::render(array($groupsTbl, $groupsTable, $entitiesForGroupTable));
 $client->close();

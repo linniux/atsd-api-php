@@ -35,7 +35,7 @@ class Utils {
        return static::$severities[$sevetitycode];
     }
 
-    static function seriesAsHtml($series) {
+    static function seriesAsHtml($series, $header = "") {
         $output = '';
         foreach ($series as $series) {
 
@@ -44,7 +44,7 @@ class Utils {
                 $body = '<tr><td>Empty</td></tr>';
             }
 
-            $output .= "<h2>" . $series['requestId'] . "</h2>
+            $output .= "<h2>" . $series['requestId'] . ": " . $header . "</h2>
             <table><thead><tr><th>time</th><th>value</th></tr></thead>" .
                 "<tbody>{$body}</tbody>" .
                 "</table>";

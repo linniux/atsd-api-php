@@ -25,7 +25,7 @@ $client = new HttpClient();
 $client->connect($iniArray["url"], $iniArray["username"], $iniArray["password"]);
 
 $expression = 'name like \'nurs*\''; 
-$tags = 'app, os'; 
+$tags = 'app, os';
 $limit = 10;
 
 $queryClient = new Entities($client);
@@ -36,14 +36,19 @@ $responseEntities = $queryClient->findAll($params);
 $viewConfig = new ViewConfiguration('Entities for expression: ' . $expression . "; tags: " . $tags . "; limit: " . $limit, 'entities', array('lastInsertTime' => 'unixtimestamp'));
 $entitiesTable = Utils::arrayAsHtmlTable($responseEntities, $viewConfig);
 
-
 $entity = "awsswgvml001";
 $responseEntity = $queryClient->find($entity);
 
 $viewConfig = new ViewConfiguration('Entity: ' . $entity, "entity");
 $entityTable = Utils::arrayAsHtmlTable(array($responseEntity), $viewConfig);
 
-Utils::render(array($entitiesTable, $entityTable));
+$params = array("limit" => $limit);
+$responseMetrics = $queryClient->findMetrics($entity, $params);
+
+$viewConfig = new ViewConfiguration('Metrics for entity: ' . $entity, "metrics");
+$metricsTable = Utils::arrayAsHtmlTable($responseMetrics, $viewConfig);
+
+Utils::render(array($entitiesTable, $entityTable, $metricsTable));
 
 
 $client->close();
