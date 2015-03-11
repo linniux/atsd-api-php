@@ -52,3 +52,8 @@ abstract class AggregateType {
     const THRESHOLD_PERCENT = "THRESHOLD_PERCENT";
 }
 
+abstract class SeriesTypes {
+    const HISTORY = 'HISTORY';
+    const FORECAST = 'FORECAST';
+    const FORECAST_DEVIATION = 'FORECAST_DEVIATION';
+}
