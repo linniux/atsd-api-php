@@ -67,8 +67,6 @@ See:
 
 [AtsdClientEntitiesExample][atsd-entities-example]
 
-[AtsdClientEntityAndTagsExample][atsd-entitiesEndTags-example]
-
 [AtsdClientEntityGroupsExample][atsd-entityGroup-example]
 
 [AtsdClientMetricsExample][atsd-metrics-example]
@@ -160,7 +158,6 @@ We selected the timezone 'UTC' for now, but please set date.timezone to select y
 [atsd-alerts-example]:http://htmlpreview.github.io/?https://github.com/axibase/atsd-api-php/blob/master/examples/AlertsExample.html
 [atsd-alertsHistory-example]:http://htmlpreview.github.io/?https://github.com/axibase/atsd-api-php/blob/master/examples/AlertsHistoryExample.html
 [atsd-entities-example]:http://htmlpreview.github.io/?https://github.com/axibase/atsd-api-php/blob/master/examples/EntitiesExample.html
-[atsd-entitiesEndTags-example]:http://htmlpreview.github.io/?https://github.com/axibase/atsd-api-php/blob/master/examples/EntityAndTagsExample.html
 [atsd-entityGroup-example]:http://htmlpreview.github.io/?https://github.com/axibase/atsd-api-php/blob/master/examples/EntityGroupsExample.html
 [atsd-metrics-example]:http://htmlpreview.github.io/?https://github.com/axibase/atsd-api-php/blob/master/examples/MetricsExample.html
 [atsd-properties-example]:http://htmlpreview.github.io/?https://github.com/axibase/atsd-api-php/blob/master/examples/PropertiesExample.html

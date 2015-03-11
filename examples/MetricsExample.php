@@ -30,10 +30,23 @@ $limit = 10;
 $queryClient = new Metrics($client);
 
 $params = array('limit' => $limit, 'expression' => $expression);
-$response = $queryClient->findAll($params);
+$responseMetrics = $queryClient->findAll($params);
 
 $viewConfig = new ViewConfiguration('Metrics for expression: ' . $expression . "; limit: " . $limit, 'metrics', array('lastInsertTime' => 'unixtimestamp'));
-$MetricsTbl = Utils::arrayAsHtmlTable($response, $viewConfig);
+$MetricsTbl = Utils::arrayAsHtmlTable($responseMetrics, $viewConfig);
 
-Utils::render(array($MetricsTbl));
+$metric = "disk_used_percent";
+$entity = "nurswgvml006";
+
+$responseMetric = $queryClient->find($metric, array("entity" => $entity));
+
+$viewConfig = new ViewConfiguration('Metric:' . $metric . ', entity: ' . $entity, 'metric', array('lastInsertTime' => 'unixtimestamp'));
+$eattableEntity = Utils::arrayAsHtmlTable(array($responseMetric), $viewConfig);
+
+$responseEntityAndTags = $queryClient->findEntityAndTags($metric);
+
+$viewConfig = new ViewConfiguration('Entity and Tags for metric: ' . $metric, 'entAndTags');
+$entityAndTagsTable = Utils::arrayAsHtmlTable($responseEntityAndTags, $viewConfig);
+
+Utils::render(array($MetricsTbl, $eattableEntity, $entityAndTagsTable));
 $client->close();

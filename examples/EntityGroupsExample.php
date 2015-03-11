@@ -30,10 +30,10 @@ $limit = 8;
 $queryClient = new EntityGroups($client);
 
 $params = array("limit" => $limit);
-$response = $queryClient->findAll($params);
+$responseEntities = $queryClient->findAll($params);
 
 $viewConfig = new ViewConfiguration("Entity groups, limit:" . $limit, 'entGroups');
-$groupsTbl = Utils::arrayAsHtmlTable($response, $viewConfig);
+$groupsTbl = Utils::arrayAsHtmlTable($responseEntities, $viewConfig);
 
 $group = "nmon-linux";
 $responseGroup = $queryClient->find($group);
@@ -41,11 +41,10 @@ $responseGroup = $queryClient->find($group);
 $viewConfigGroup = new ViewConfiguration('Group: ' . $group, 'group');
 $groupsTable = Utils::arrayAsHtmlTable(array($responseGroup), $viewConfigGroup);
 
-$queryClientEntities = new Entities($client);
-$responseEntities = $queryClientEntities->findForGroup($group);
+$responseEntitiesForGroup = $queryClient->findForGroup($group);
 
 $viewConfigEntities = new ViewConfiguration('Entities for group: ' . $group , 'entForGroup', array('lastInsertTime' => 'unixtimestamp'));
-$entitiesForGroupTable = Utils::arrayAsHtmlTable($responseEntities, $viewConfigEntities);
+$entitiesForGroupTable = Utils::arrayAsHtmlTable($responseEntitiesForGroup, $viewConfigEntities);
 
 
 Utils::render(array($groupsTbl, $groupsTable, $entitiesForGroupTable));

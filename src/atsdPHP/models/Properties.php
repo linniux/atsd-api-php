@@ -22,10 +22,10 @@ class Properties  extends AtsdClient{
 
     function __construct($client) {
         parent::__construct($client);
-        $this->queryUri = Properties::URI ;
     }
 
     function find($jsonRequest) {
+        $this->queryUri = Properties::URI ;
         $this->postParams = $jsonRequest;
         return $this->query($this->queryUri);
     }

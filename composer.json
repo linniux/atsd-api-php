@@ -18,7 +18,6 @@
         "src/atsdPHP/models/AlertsHistory.php",
         "src/atsdPHP/models/Alerts.php",
         "src/atsdPHP/models/Entities.php",
-        "src/atsdPHP/models/EntityAndTags.php",
         "src/atsdPHP/models/EntityGroups.php",
         "src/atsdPHP/models/Metrics.php",
         "src/atsdPHP/models/Properties.php",

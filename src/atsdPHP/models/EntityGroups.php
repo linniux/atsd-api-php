@@ -17,8 +17,9 @@
 namespace axibase\atsdPHP;
 
 class EntityGroups extends AtsdClient {
-    const URI = '/entity-groups?';
+    const GROUPS_URI = '/entity-groups?';
     const GROUP_URI = '/entity-groups/[[group]]';
+    const ENTITIES_FOR_GROUP_URI = '/entity-groups/[[group]]/entities?';
     protected $queryUri;
 
     function __construct($client) {
@@ -26,7 +27,13 @@ class EntityGroups extends AtsdClient {
     }
 
     function findAll($getParameters = array()) {
-        $this->queryUri = EntityGroups::URI;
+        $this->queryUri = EntityGroups::GROUPS_URI;
+        $this->applyGetParameters($getParameters);
+        return $this->query($this->queryUri . $this->getParams);
+    }
+
+    function findForGroup($group, $getParameters = array()) {
+        $this->queryUri = str_replace('[[group]]', urlencode($group), EntityGroups::ENTITIES_FOR_GROUP_URI);
         $this->applyGetParameters($getParameters);
         return $this->query($this->queryUri . $this->getParams);
     }

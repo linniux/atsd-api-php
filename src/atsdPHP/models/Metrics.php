@@ -17,17 +17,26 @@
 namespace axibase\atsdPHP;
 
 class Metrics  extends AtsdClient {
-    const URI = '/metrics?';
+    const METRICS_URI = '/metrics?';
     const METRIC_URI = '/metrics/[[metric]]?';
+    const ENTITY_AND_TAGS_FOR_METRIC_URI = '/metrics/[[metric]]/entity-and-tags?';
     protected $queryUri;
 
     function __construct($client) {
         parent::__construct($client);
-        $this->queryUri = Metrics::URI;
+    }
+
+    function findEntityAndTags($metric, $entity = null) {
+        $this->queryUri = str_replace('[[metric]]', urlencode($metric), Metrics::ENTITY_AND_TAGS_FOR_METRIC_URI);
+        if($entity) {
+            $this->applyGetParameters(array("entity" => $entity));
+        }
+        return $this->query($this->queryUri . $this->getParams);
+
     }
 
     function findAll($getParameters = array()) {
-        $this->queryUri = Metrics::URI;
+        $this->queryUri = Metrics::METRICS_URI;
         $this->applyGetParameters($getParameters);
         return $this->query($this->queryUri . $this->getParams);
     }
