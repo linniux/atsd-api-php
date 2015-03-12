@@ -39,6 +39,8 @@ Before you begin installing ATSD Client for PHP, you need to install a copy of t
 
 Minimum requirements for running the ATSD Client: PHP 5.3.2+
 
+* [Windows installation][windows-installation]
+
 Installing the ATSD Client:
 
 ```
@@ -152,9 +154,8 @@ We selected the timezone 'UTC' for now, but please set date.timezone to select y
 
 [atsd]:https://axibase.com/products/axibase-time-series-database/
 [atsd-api]:https://axibase.com/products/axibase-time-series-database/reading-data/php/
-[atsd-zip]:https://github.com/axibase/atsd-api-java/releases/download/untagged-0901a806a9372ef24c51/v0.3-alpha.zip
 [atsd-issues]:https://www.axibase.com/support.htm
-
+[windows-installation]:https://github.com/axibase/atsd-api-php/ATSD-php-client_Windows
 [atsd-alerts-example]:http://htmlpreview.github.io/?https://github.com/axibase/atsd-api-php/blob/master/examples/AlertsExample.html
 [atsd-alertsHistory-example]:http://htmlpreview.github.io/?https://github.com/axibase/atsd-api-php/blob/master/examples/AlertsHistoryExample.html
 [atsd-entities-example]:http://htmlpreview.github.io/?https://github.com/axibase/atsd-api-php/blob/master/examples/EntitiesExample.html
