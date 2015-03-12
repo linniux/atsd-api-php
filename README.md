@@ -8,8 +8,7 @@ The **ATSD Client for PHP** enables PHP developers to easily read and write stat
 
 ## Implemented Methods
 
-**The ATSD Client for PHP** in an easy-to-use client for interfacing with **ATSD** metadata and data REST API services.
-It has the ability to read time-series values, statistics, properties, alerts, and messages.
+**The ATSD Client for PHP** in an easy-to-use client for interfacing with **ATSD** metadata and data REST API services. It has the ability to read time-series values, statistics, properties, alerts, and messages.
 
 - Data API
     - Series
@@ -21,7 +20,7 @@ It has the ability to read time-series values, statistics, properties, alerts, a
     - Alerts History
         - QUERY
 
-- Metadata API
+- Meta API
     - Metrics
         - Get Metrics
         - Get Metric
@@ -35,7 +34,7 @@ It has the ability to read time-series values, statistics, properties, alerts, a
 
 
 ## Getting Started
-Before you begin installing ATSD Client for PHP, you need to install a copy of the [Axibase Time-Series Database][atsd]. Download the latest version of ATSD that is available for your Linux distribution.
+Before you begin using ATSD Client for PHP, you need to install a copy of the [Axibase Time-Series Database][atsd]. Download the latest version of ATSD that is available for your Linux distribution.
 
 Minimum requirements for running the ATSD Client: PHP 5.3.2+
 
@@ -43,7 +42,7 @@ Minimum requirements for running the ATSD Client: PHP 5.3.2+
 
 Installing the ATSD Client:
 
-```
+```shell
 git clone https://github.com/axibase/atsd-api-php.git
 mv atsd-api-php /{your_documentroot_folder}/
 cd /{you_documentroot_folder}/atsd-api-php/examples
@@ -51,7 +50,7 @@ firefox *.php
 ```
 ## Composer
 Once in composer.json, specify the following:
-```
+```javascript
 {
 "require": {
     "axbase/atsd-api-php": "dev-master"
@@ -60,7 +59,6 @@ Once in composer.json, specify the following:
 ```
 ## Examples
 
-See:
 [AtsdClientBasicExample][atsd-basic-example]
 
 [AtsdClientAlertsExample][atsd-alerts-example]
