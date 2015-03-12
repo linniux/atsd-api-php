@@ -17,7 +17,6 @@ namespace axibase\atsdPHP;
 
 class Series extends AtsdClient{
     const URL = "/series";
-    private $seriesKeys;
     private $queries;
     private $series;
     private $currentQuery;
@@ -25,7 +24,6 @@ class Series extends AtsdClient{
     function __construct($client) {
         parent::__construct($client);
         $this->postParams = array();
-        $this->seriesKeys = array();
         $this->queries = array();
         $this->currentQuery = array();
     }
@@ -75,12 +73,11 @@ class Series extends AtsdClient{
         return $this->series;
     }
 
-
     public function getSeries($key) {
         if(array_key_exists($key, $this->series)) {
             return $this->series[$key];
         } else {
-            return array();
+            return null;
         }
     }
 }
