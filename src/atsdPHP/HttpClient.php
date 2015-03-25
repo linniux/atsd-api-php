@@ -37,7 +37,8 @@ namespace axibase\atsdPHP {
 
             $this->curlHandler = curl_init();
             curl_setopt_array($this->curlHandler, $this->defOptions);
-            curl_setopt($this->curlHandler, CURLOPT_USERPWD, "$this->username:$this->password");
+            if ( $username && $password)
+                curl_setopt($this->curlHandler, CURLOPT_USERPWD, "$this->username:$this->password");
         }
 
         public function query($uri, $postdata = null) {
