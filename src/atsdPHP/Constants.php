@@ -17,6 +17,7 @@
 namespace axibase\atsdPHP;
 
 abstract class TimeUnit {
+    const MILLISECOND = 'MILLISECOND';
     const YEAR = 'YEAR';
     const QUARTER = 'QUARTER';
     const MONTH = 'MONTH';
