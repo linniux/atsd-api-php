@@ -30,7 +30,7 @@ $queryClient->addDetailQuery('nurswgvml007', 'cpu_busy', 1424612226000, 14246124
 
 $aggregator = new Aggregator(array(AggregateType::AVG), array("count" => 1, "unit" => TimeUnit::HOUR));
 $queryClient->addAggregateQuery('nurswgvml007', 'cpu_busy', 0, 1424612453000, $aggregator);
-$queryClient->addQuery("nurswgvml007", "cpu_busy", array("limit" => "4"));
+$queryClient->addQuery("nurswgvml007", "cpu_busy", array("startTime" => 0, "endTime" => 1424612453000, "limit" => "4"));
 $response = $queryClient->execQueries();
 
 $tables = array();

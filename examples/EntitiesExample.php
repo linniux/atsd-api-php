@@ -24,7 +24,7 @@ $iniArray = parse_ini_file("atsd.ini");
 $client = new HttpClient();
 $client->connect($iniArray["url"], $iniArray["username"], $iniArray["password"]);
 
-$expression = 'name like \'nurs*\''; 
+$expression = 'name like \'nurswgvmw*\'';
 $tags = 'app, os';
 $limit = 10;
 

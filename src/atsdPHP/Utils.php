@@ -43,7 +43,7 @@ class Utils {
                 $body = '<tr><td>Empty</td></tr>';
             }
 
-            $output .= "<h2>" . $series['requestId'] . ": . " . $header . "</h2>
+            $output .= "<h2>" . $series['requestId'] . ": " . $header . "</h2>
             <table><thead><tr><th>time</th><th>value</th></tr></thead>" .
                 "<tbody>{$body}</tbody>" .
                 "</table>";
@@ -139,7 +139,7 @@ class Utils {
         <table id='" . $viewConfig->getId() . "'>
         <thead><tr>[[HEAD]]</tr></thead>
         <tbody>[[BODY]]</tbody></table>";
-        $thead = "";
+        $thead = "<th>type</th><th>entity</th>";
         $tbody = "";
         $uniqHead = array();
         foreach($propertiesArray as $propertyArray) {
@@ -159,8 +159,8 @@ class Utils {
 
         $tbl = str_replace('[[HEAD]]', $thead, $tbl);
         foreach($propertiesArray as $propertyArray) {
-            foreach($propertyArray["values"] as $key => $value) {
-                $tbody .= "<tr>";
+            foreach($propertyArray["tags"] as $key => $value) {
+                $tbody .= "<tr><td>" . $propertyArray["type"] . "</td><td>" . $propertyArray["entity"] . "</td>";
                 foreach($uniqHead as $hdr) {
                     $tbody .= "<td>" . $propertyArray["key"][$hdr] . "</td>";
                 }
