@@ -76,7 +76,6 @@ Once in composer.json, specify the following:
 [AtsdClientSeriesExample][atsd-series-example]
 
 ### Client Configuration
-
 ```php
 $iniArray = parse_ini_file("atsd.ini");
 ```
@@ -140,6 +139,47 @@ Utils::render($tables);
 $client->close();
 ```
 
+### Series Queries
+You are able to customize your series query to use <a target="_blank" href="http://axibase.com/atsd/api/#aggregated-example">aggregate functionality</a> using the following syntax:
+```php
+$queryClient->addQuery("Entity1", "Metric1", array(
+    "startDate" => "2015-02-05T09:53:00Z",
+    "endDate" => "2015-02-05T09:54:00Z",
+    "timeFormat" => "iso",
+    "requestId" => "r-1",
+    "tags" => array(
+        "tag1" => array(
+            "value1"
+        ),
+        "tag2"=>array(
+            "value2",
+            "Value3"
+        )
+    ),
+    "type"=>"history",
+    "group"=>array(
+        "type"=>"AVG",
+        "interpolate"=>"STEP"
+    ),
+    "rate"=>array(
+        "interval"=>array(
+            "count"=>1,
+            "unit"=>"HOUR"
+        )
+    ),
+    "aggregate"=>array(
+        "types"=>array(
+            "AVG",
+            "MAX"
+        ),
+        "interval"=>array(
+            "count"=>1,
+            "unit"=>"HOUR"
+        ),
+        "interpolate"=>"NONE"
+    )
+));
+```
 ### Troubleshooting
 
 If you get an error like the following, ensure that the variable date.timezone in your php.ini is set.
