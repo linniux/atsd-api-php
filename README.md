@@ -53,7 +53,7 @@ Once in composer.json, specify the following:
 ```javascript
 {
 "require": {
-    "axbase/atsd-api-php": "dev-master"
+    "axibase/atsd-api-php": "dev-master"
     }
 }
 ```
