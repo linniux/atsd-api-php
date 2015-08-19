@@ -1,6 +1,6 @@
 # Axibase Time-Series Database Client for PHP
 
-The **ATSD Client for PHP** enables PHP developers to easily read and write statistics and metadata from the 
+The **ATSD Client for PHP** enables PHP developers to easily read statistics and metadata from the 
 [Axibase Time-Series Database][atsd]. With minimal effort, you can build reporting, analytics, and alerting solutions. Use [Composer][axibase_atsd-api-php] to get started with this PHP API.
 
 * [Documentation][atsd-api]
@@ -202,5 +202,5 @@ We selected the timezone 'UTC' for now, but please set date.timezone to select y
 [atsd-metrics-example]:http://htmlpreview.github.io/?https://github.com/axibase/atsd-api-php/blob/master/examples/MetricsExample.html
 [atsd-properties-example]:http://htmlpreview.github.io/?https://github.com/axibase/atsd-api-php/blob/master/examples/PropertiesExample.html
 [atsd-series-example]:http://htmlpreview.github.io/?https://github.com/axibase/atsd-api-php/blob/master/examples/SeriesExample.html
-[atsd-basic-example]:http://htmlpreview.github.io/?https://github.com/axibase/atsd-api-php/blob/master/examples/BasicExample.html
+[atsd-basic-example]:https://github.com/axibase/atsd-api-php/blob/master/examples/BasicExample.html
 [axibase_atsd-api-php]:https://packagist.org/packages/axibase/atsd-api-php
