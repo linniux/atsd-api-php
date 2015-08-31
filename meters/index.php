@@ -22,7 +22,7 @@ $request = new axibase\atsdPHP\Request();
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-    <link rel="stylesheet" type="text/css" href="http://lab.axibase.com/chartlab/portal/CSS/charts.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://lab.axibase.com/chartlab/portal/CSS/charts.min.css"/>
     <link href="css/meters.css" type="text/css" rel="stylesheet"/>
     <script type="text/javascript" src="https://axibase.com/atsd/portalFiddle/portal/JavaScript/d3.min.js"></script>
     <script type="text/javascript" src="https://axibase.com/atsd/portalFiddle/portal/JavaScript/portal_init.js"></script>
