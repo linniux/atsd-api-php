@@ -16,7 +16,6 @@ sudo service apache2 restart
 sudo apt-get install apache2-utils
 ```
 4. Generate password file:
-To generate authientication file:
 ```bash
 touch atsd-api-php/meters/.htpasswd
 htdigest atsd-api-php/meters/.htpasswd meters admin
