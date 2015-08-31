@@ -15,14 +15,12 @@
 */
 
 namespace axibase\atsdPHP;
-require_once '../src/atsdPHP/AtsdClient.php';
-require_once '../src/atsdPHP/models/Properties.php';
-require_once '../src/atsdPHP/HttpClient.php';
-require_once '../src/atsdPHP/Utils.php';
+require_once '../atsdPHP/models/Properties.php';
+require_once '../atsdPHP/HttpClient.php';
+require_once '../atsdPHP/Utils.php';
 
-$iniArray = parse_ini_file("atsd.ini");
 $client = new HttpClient();
-$client->connect($iniArray["url"], $iniArray["username"], $iniArray["password"]);
+$client->connect();
 
 $type = "System";
 $entity = "awsswgvml001";

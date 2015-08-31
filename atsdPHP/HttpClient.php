@@ -20,8 +20,25 @@ namespace axibase\atsdPHP {
      * @package axibase\atsdPHP
      */
     class HttpClient {
+        const CONFIG = 'atsd.ini';
 
         function __construct() {
+            if(!function_exists('curl_version')) {
+                echo "ERROR: can not find curl extension.";
+                die();
+            }
+            $this->defOptions = array(
+                CURLOPT_HTTPHEADER => array('content-Type: application/json', 'charset=utf-8', 'Connection: keep-alive'),
+                CURLOPT_RETURNTRANSFER => true
+            );
+            $iniArray = parse_ini_file(self::CONFIG);
+            if(array_key_exists('url', $iniArray) && array_key_exists('username', $iniArray) && array_key_exists('password', $iniArray)) {
+                $this->url = $iniArray["url"];
+                $this->username = $iniArray["username"];
+                $this->password =  $iniArray["password"];
+            } else {
+                throw new \Exception("url, username or password is not set.");
+            }
         }
         /**
          * Init connection with specified url.
@@ -30,15 +47,10 @@ namespace axibase\atsdPHP {
          * @param string $username username
          * @param string $password atsd user's password
          */
-        public function connect($url, $username=null, $password=null) {
-            $this->url = $url;
-            $this->username = $username;
-            $this->password = $password;
-
+        public function connect() {
             $this->curlHandler = curl_init();
             curl_setopt_array($this->curlHandler, $this->defOptions);
-            if ( $username && $password)
-                curl_setopt($this->curlHandler, CURLOPT_USERPWD, "$this->username:$this->password");
+            curl_setopt($this->curlHandler, CURLOPT_USERPWD, "$this->username:$this->password");
         }
 
         public function query($uri, $postdata = null) {
@@ -53,12 +65,16 @@ namespace axibase\atsdPHP {
                 curl_setopt($this->curlHandler, CURLOPT_URL, $this->url . $uri);
                 curl_setopt($this->curlHandler, CURLOPT_POSTFIELDS, json_encode($postdata));
             }
-            $response = json_decode(curl_exec($this->curlHandler), true);
-            if ($response === null) {
-                throw new \ErrorException("Error: " . var_export(curl_getinfo($this->curlHandler), true));
-            }
-            if (array_key_exists("error", $response) && isset($response["error"])) {
-                throw new \ErrorException('Error: ' . $response['error']);
+            $response = curl_exec($this->curlHandler);
+            $responseContentType = curl_getinfo($this->curlHandler, CURLINFO_CONTENT_TYPE);
+            if(strpos($responseContentType, "json") !== false) {
+                $response = json_decode($response, true);
+                if ($response === null) {
+                    throw new \ErrorException("Error: " . var_export(curl_getinfo($this->curlHandler), true));
+                }
+                if (array_key_exists("error", $response) && isset($response["error"])) {
+                    throw new \ErrorException('Error: ' . $response['error']);
+                }
             }
             return $response;
         }
@@ -78,9 +94,6 @@ namespace axibase\atsdPHP {
 
         private $curlHandler;
 
-        private $defOptions = array(
-            CURLOPT_HTTPHEADER => array('content-Type: application/json', 'charset=utf-8', 'Connection: keep-alive'),
-            CURLOPT_RETURNTRANSFER => true
-        );
+        private $defOptions;
     }
 }

@@ -15,9 +15,10 @@
 */
 
 namespace axibase\atsdPHP;
+require_once(dirname(__FILE__) . '/../AtsdClient.php');
 
-class Alerts  extends AtsdClient {
-    const URI = '/alerts';
+class Properties  extends AtsdClient{
+    const URI = '/properties';
     protected $queryUri;
 
     function __construct($client) {
@@ -25,8 +26,9 @@ class Alerts  extends AtsdClient {
     }
 
     function find($jsonRequest) {
-        $this->queryUri = Alerts::URI;
+        $this->queryUri = Properties::URI ;
         $this->postParams = $jsonRequest;
         return $this->query($this->queryUri);
     }
+
 }

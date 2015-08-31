@@ -14,12 +14,14 @@
 * permissions and limitations under the License.
 */
 namespace axibase\atsdPHP;
+require_once(dirname(__FILE__) . '/../AtsdClient.php');
 
 class Series extends AtsdClient{
     const URL = "/series";
     private $queries;
     private $series;
     private $currentQuery;
+    protected $queryUri;
 
     function __construct($client) {
         parent::__construct($client);
@@ -80,6 +82,13 @@ class Series extends AtsdClient{
             return null;
         }
     }
+
+    public function simpleQuery($query) {
+        $this->postParams = json_decode($query);
+        $response = $this->query(Series::URL);
+        return $response;
+    }
+
 }
 
 class Aggregator {
@@ -111,6 +120,4 @@ class Aggregator {
 
 
 }
-
-
 

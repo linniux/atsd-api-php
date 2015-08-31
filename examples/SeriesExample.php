@@ -15,15 +15,13 @@
 */
 
 namespace axibase\atsdPHP;
-require_once '../src/atsdPHP/AtsdClient.php';
-require_once '../src/atsdPHP/models/Series.php';
-require_once '../src/atsdPHP/HttpClient.php';
-require_once '../src/atsdPHP/Utils.php';
-require_once '../src/atsdPHP/Constants.php';
+require_once '../atsdPHP/models/Series.php';
+require_once '../atsdPHP/HttpClient.php';
+require_once '../atsdPHP/Utils.php';
+require_once '../atsdPHP/Constants.php';
 
-$iniArray = parse_ini_file("atsd.ini");
 $client = new HttpClient();
-$client->connect($iniArray["url"], $iniArray["username"], $iniArray["password"]);
+$client->connect();
 
 $queryClient = new Series($client);
 $queryClient->addDetailQuery('nurswgvml007', 'cpu_busy', 1424612226000, 1424612453000);

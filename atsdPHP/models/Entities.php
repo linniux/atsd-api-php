@@ -15,41 +15,37 @@
 */
 
 namespace axibase\atsdPHP;
+require_once(dirname(__FILE__) . '/../AtsdClient.php');
 
-class Metrics  extends AtsdClient {
-    const METRICS_URI = '/metrics?';
-    const METRIC_URI = '/metrics/[[metric]]?';
-    const ENTITY_AND_TAGS_FOR_METRIC_URI = '/metrics/[[metric]]/entity-and-tags?';
+class Entities  extends AtsdClient {
+    const ENTITIES_URI = '/entities?';
+    const ENTITY_URI = '/entities/[[entity]]';
+    const METRICS_FOR_ENTITY = '/entities/[[entity]]/metrics?';
     protected $queryUri;
 
     function __construct($client) {
         parent::__construct($client);
     }
 
-    function findEntityAndTags($metric, $entity = null) {
-        $this->queryUri = str_replace('[[metric]]', urlencode($metric), Metrics::ENTITY_AND_TAGS_FOR_METRIC_URI);
-        if($entity) {
-            $this->applyGetParameters(array("entity" => $entity));
-        }
-        return $this->query($this->queryUri . $this->getParams);
-
-    }
-
     function findAll($getParameters = array()) {
-        $this->queryUri = Metrics::METRICS_URI;
+        $this->queryUri = Entities::ENTITIES_URI;
         $this->applyGetParameters($getParameters);
         return $this->query($this->queryUri . $this->getParams);
     }
 
-    function find($metric, $getParameters = array()) {
-        $this->queryUri = str_replace('[[metric]]', urlencode($metric), Metrics::METRIC_URI);
+    function find($entity) {
+        $this->queryUri = str_replace('[[entity]]', urlencode($entity), Entities::ENTITY_URI);
+        return $this->query($this->queryUri);
+    } 
+
+
+    function findMetrics($entity, $getParameters = array()) {
+        $this->queryUri = str_replace('[[entity]]', urlencode($entity), Entities::METRICS_FOR_ENTITY);
         $this->applyGetParameters($getParameters);
         return $this->query($this->queryUri . $this->getParams);
-
     }
 
-    private function applyGetParameters($getParameters) {
-        $this->getParams = http_build_query($getParameters);
+    private function applyGetParameters($parameters) {
+        $this->getParams = http_build_query($parameters);
     }
-
 }

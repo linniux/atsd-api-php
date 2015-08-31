@@ -15,15 +15,13 @@
 */
 
 namespace axibase\atsdPHP;
-require_once '../src/atsdPHP/AtsdClient.php';
-require_once '../src/atsdPHP/models/EntityGroups.php';
-require_once '../src/atsdPHP/models/Entities.php';
-require_once '../src/atsdPHP/HttpClient.php';
-require_once '../src/atsdPHP/Utils.php';
+require_once '../atsdPHP/models/EntityGroups.php';
+require_once '../atsdPHP/models/Entities.php';
+require_once '../atsdPHP/HttpClient.php';
+require_once '../atsdPHP/Utils.php';
 
-$iniArray = parse_ini_file("atsd.ini");
 $client = new HttpClient();
-$client->connect($iniArray["url"], $iniArray["username"], $iniArray["password"]);
+$client->connect();
 
 $limit = 8;
 
@@ -41,7 +39,7 @@ $responseGroup = $queryClient->find($group);
 $viewConfigGroup = new ViewConfiguration('Group: ' . $group, 'group');
 $groupsTable = Utils::arrayAsHtmlTable(array($responseGroup), $viewConfigGroup);
 
-$responseEntitiesForGroup = $queryClient->findForGroup($group);
+$responseEntitiesForGroup = $queryClient->findEntities($group);
 
 $viewConfigEntities = new ViewConfiguration('Entities for group: ' . $group , 'entForGroup', array('lastInsertTime' => 'unixtimestamp'));
 $entitiesForGroupTable = Utils::arrayAsHtmlTable($responseEntitiesForGroup, $viewConfigEntities);

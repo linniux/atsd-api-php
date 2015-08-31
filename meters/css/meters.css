@@ -1,0 +1,53 @@
+[class^="widget"]{
+    /*	border: 1px dotted black;*/
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    margin: 5px;
+}
+[class^="widget-table"], [class^="widget-console"], [class^="widget-property"]{
+    height: auto !important;
+}
+
+body {
+    overflow: auto !important;
+}
+
+#header {
+    background-color:darkgrey;
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+
+#nav {
+    line-height:40px;
+    background-color:#eeeeee;
+    height: 600px;
+    width:150px;
+    float:left;
+    padding:5px;
+}
+#section {
+    width:1300px;
+    float:left;
+    padding:10px;
+}
+#footer {
+    background-color:black;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px;
+}
+.axi-tooltip {
+    text-align: left;
+}
+body, td, table {
+    font-family: Arial;
+}
+
+.axi-tooltip-container{
+    z-index: -1
+}
+

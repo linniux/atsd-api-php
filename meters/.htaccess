@@ -1,0 +1,4 @@
+AuthType Digest
+AuthName meters
+AuthUserFile "/home/sild/code/svn/axibase/AxibaseAPI/atsd-api-php/meters/.htpasswd"
+Require valid-user

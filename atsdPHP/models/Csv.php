@@ -15,19 +15,29 @@
 */
 
 namespace axibase\atsdPHP;
+require_once(dirname(__FILE__) . '/../AtsdClient.php');
 
-class Properties  extends AtsdClient{
-    const URI = '/properties';
+class Csv  extends AtsdClient {
+    const EXPORT_URI = "/export?";
     protected $queryUri;
 
     function __construct($client) {
         parent::__construct($client);
     }
 
-    function find($jsonRequest) {
-        $this->queryUri = Properties::URI ;
-        $this->postParams = $jsonRequest;
-        return $this->query($this->queryUri);
+    public function export($entity, $metric, $endDate, $interval, $optional = array() ) {
+        $this->postParams = array();
+        $this->postParams['e'] = $entity;
+        $this->postParams['m'] = $metric;
+        $this->postParams['t'] = 'HISTORY';
+        $this->postParams['si'] = $interval;
+        $this->postParams['et'] = $endDate;
+        $this->postParams['f'] = 'CSV';
+        foreach($optional as $key => $value) {
+            $this->postParams[$key] = $value;
+        }
+        $response = $this->client->query(self::EXPORT_URI, $this->postParams);
+        return $response;
     }
 
 }

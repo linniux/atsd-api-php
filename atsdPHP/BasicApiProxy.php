@@ -15,19 +15,29 @@
 */
 
 namespace axibase\atsdPHP;
-
-class AlertsHistory  extends AtsdClient {
-    const HISTORY_URI = '/alerts/history';
-    protected $queryUri;
-
-    function __construct($client) {
-        parent::__construct($client);
+require_once '../atsdPHP/HttpClient.php';
+require_once '../atsdPHP/models/Series.php';
+class BasicApiProxy {
+    protected function validate($string) {
+        return true;
     }
 
-    function findHistory($jsonRequest) {
-        $this->queryUri = AlertsHistory::HISTORY_URI;
-        $this->postParams = $jsonRequest;
-        return $this->query($this->queryUri);
+    public function apiSeriesSimpleQuery($string) {
+        $httpClient = new HttpClient();
+        $httpClient->connect();
+        $seriesClient = new Series($httpClient);
+        if(!$this->validate($string)) {
+            return "";
+        }
+        $response = $seriesClient->simpleQuery($string);
+        return $response;
+
+    }
+
+    public function getPost() {
+        $input = file_get_contents("php://input");
+        return $input;
     }
 
 }
+

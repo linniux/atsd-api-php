@@ -14,7 +14,8 @@
 * permissions and limitations under the License.
 */
 
-namespace axibase\atsdPHP;
+namespace axibase\atsdPHP {
+
     abstract class AtsdClient {
         protected $client;
         private $api;
@@ -33,5 +34,5 @@ namespace axibase\atsdPHP;
         }
 
     }
-
+}
 
