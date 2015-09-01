@@ -70,10 +70,11 @@ namespace axibase\atsdPHP {
             if(strpos($responseContentType, "json") !== false) {
                 $response = json_decode($response, true);
                 if ($response === null) {
-                    throw new \ErrorException("Error: " . var_export(curl_getinfo($this->curlHandler), true));
+                    throw new \ErrorException("ERROR: " . var_export(curl_getinfo($this->curlHandler), true));
                 }
                 if (array_key_exists("error", $response) && isset($response["error"])) {
-                    throw new \ErrorException('Error: ' . $response['error']);
+                    throw new \ErrorException('ERROR: ' . $response['error']);
+
                 }
             }
             return $response;
