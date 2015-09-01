@@ -52,6 +52,12 @@ $ sudo service apache2 restart
 Then you can access the application on the following URL:
 yourDomainName/meters/
 
+#### Change the displayed and reported metrics
+To change displayed and reported metrics modify the ```atsd-api-php/meters/js/meters-config.js``` file and set your collected metric from ATSD on the first line:
+```
+var metricValue = "sml.power-consumed";
+```
+
 ### Users-Group.
 To define users group your need to modify ```atsd-api-php/meters/users-group.ini``` file. 
 users-group.ini example:
