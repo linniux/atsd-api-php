@@ -1,7 +1,8 @@
 <?php
-namespace axibase\atsdPHP;
 require_once(dirname(__FILE__)) . '/../atsdPHP/HttpClient.php';
 require_once(dirname(__FILE__)) . '/../atsdPHP/models/EntityGroups.php';
+use axibase\atsdPHP\HttpClient;
+use axibase\atsdPHP\EntityGroups;
 
 class Request {
     const TIMEZONE = 'UTC';
@@ -22,11 +23,17 @@ class Request {
     }
 
     function __construct() {
-        $this->timezone = new \DateTimeZone(self::TIMEZONE);
         session_start();
+        if(array_key_exists('logout', $_POST) && $_POST['logout'] == 'true') {
+            session_unset();
+            session_destroy();
+            header('HTTP/1.1 401 Unauthorized');
+            header('Refresh: 0');
+        }
         if(!array_key_exists('PHP_AUTH_USER', $_SERVER)) {
             exit("Authentication required");
         }
+        $this->timezone = new DateTimeZone(self::TIMEZONE);
         if(!array_key_exists('user', $_SESSION) || $_SESSION['user'] != $_SERVER['PHP_AUTH_USER']) {
             session_unset();
             $_SESSION['user'] = $_SERVER['PHP_AUTH_USER'];
@@ -60,8 +67,8 @@ class Request {
     }
 
     function formatEndTime($intervalType, $num, $view = false) {
-        $endDate = new \DateTime('now', $this->timezone);
-        $dayInterval = new \DateInterval('P1D');
+        $endDate = new DateTime('now', $this->timezone);
+        $dayInterval = new DateInterval('P1D');
         switch ($intervalType) {
             case 'day':
                 $interval = $dayInterval;
@@ -70,7 +77,7 @@ class Request {
                 if($endDate->format('w') == 1) {
                     $endDate->add($dayInterval);
                 }
-                $interval = new \DateInterval('P1W');
+                $interval = new DateInterval('P1W');
                 while($endDate->format('w') != 1) {
                     $endDate->add($dayInterval);
                 }
@@ -79,7 +86,7 @@ class Request {
                 if($endDate->format('d') == 1) {
                     $endDate->add($dayInterval);
                 }
-                $interval = new \DateInterval('P1M');
+                $interval = new DateInterval('P1M');
                 while($endDate->format('d') != 1) {
                     $endDate->add($dayInterval);
                 }

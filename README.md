@@ -82,7 +82,7 @@ const CONFIG = 'atsd.ini';
 ...
 $iniArray = parse_ini_file(self::config);
 ```
-Do not forget to specify the right username and password in atsd.ini (```atsd-api-php/atsdPHP/atsd.ini```)
+Do not forget to specify the correct username and password in atsd.ini (```atsd-api-php/atsdPHP/atsd.ini```)
 
 ### Metadata Processing
 ```php
