@@ -5,9 +5,14 @@ Read more about this use case on [axibase.com]
 
 To implement it, execute the following steps:
 
-#### Install [atsd-api-php] client. Make sure that examples are working correctly.
+#### Install [atsd-api-php] client. 
 
 Make sure you set the right ATSD user and password in atsd-api-php/atsdPHP/atsd.ini
+
+#### Check connection
+Navigate to the following URL:
+```yourDomainName/atsd-api-php/examples/testConnection.php```. 
+Make sure that application response is "Connection success.".
 
 #### Enable digest authentication on your apache server:
 ```bash
@@ -15,7 +20,7 @@ $ sudo a2enmod auth_digest
 $ sudo service apache2 restart
 ```
 
-#### Install ```apache2-utils``` package to use ```htdigest``` utill (is required to generate authentication file)
+#### Install ```apache2-utils``` package to use ```htdigest``` utility (required to generate the authentication file)
 ```bash
 $ sudo apt-get install apache2-utils
 ```
@@ -34,13 +39,13 @@ AuthUserFile "/documentRoot/atsd-api-php/meters/.htpasswd"
 #### Access the application.
 You can access the applicattion on the following URL:
 yourDomainName/atsd-api-php/meters/
-If you wish to make your URL more clear, you are able to create ```.htaccess``` file in your ```documentRoot``` with the following content:
+If you want to create a castum URL, create a new ```.htaccess``` file in your ```documentRoot``` directory with the following content:
 ```
 RewriteEngine On
 RewriteBase /
 RewriteRule ^(meters/.*)$ /atsd-api-php/$1 
 ```
-Make sure that rewrite mode is enable on your server, or enable it and restart the server:
+Make sure that rewrite mode is enabled on your server, or enable it and restart the server:
 ```
 $ sudo a2enmod rewrite
 $ sudo service apache2 restart
@@ -49,7 +54,7 @@ Then you can access the application on the following URL:
 yourDomainName/meters/
 
 ### Users-Group.
-To define users group your are able to modify ```atsd-api-php/meters/users-group.ini``` file. 
+To define users group your need to modify ```atsd-api-php/meters/users-group.ini``` file. 
 users-group.ini example:
 ```bash
 user-to-group]
@@ -58,7 +63,7 @@ user-001 = org-001-entities
 user-002 = org-002-entities
 user-guest = org-none-entities
 ```
-Entities group are configuring with ATSD web interface.
+Entity groups are configured in ATSD web interface.
 
 #### Troubleshooting
 
