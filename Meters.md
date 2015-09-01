@@ -5,7 +5,7 @@ Read more about this use case on [axibase.com]
 
 To implement it, execute the following steps:
 
-#### Install [atsd-api-php] client.
+#### Install [atsd-api-php] client. Make sure that examples are working correctly.
 
 Make sure you set the right ATSD user and password in atsd-api-php/atsdPHP/atsd.ini
 
@@ -14,8 +14,6 @@ Make sure you set the right ATSD user and password in atsd-api-php/atsdPHP/atsd.
 $ sudo a2enmod auth_digest
 $ sudo service apache2 restart
 ```
-
-#### Test your connection ???????????
 
 #### Install ```apache2-utils``` package to use ```htdigest``` utill (is required to generate authentication file)
 ```bash
