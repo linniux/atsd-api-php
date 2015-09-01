@@ -38,7 +38,7 @@ function generateSummary() {
     for(i = 0; i < entities.length; i++) {
         entity = entities[i];
         var serie = {
-            metric: 'sml.power-consumed',
+            metric: metricValue,
             entity: entity.getAttribute('value'),
             label: entity.getAttribute('value'),
             period: '1 day',

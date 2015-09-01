@@ -1,3 +1,4 @@
+var metricValue = "sml.power-consumed";
 var widgetConfigs = {};
 
 widgetConfigs.text = [{
@@ -9,7 +10,7 @@ widgetConfigs.text = [{
     path: 'ApiProxy.php',
     series: [{
         label: 'Current Usage',
-        metric: 'sml.power-consumed',
+        metric: metricValue,
         icon: './css/ecology_color_21.svg',
         statistics: 'sum',
         period: '1 hour'
@@ -41,7 +42,7 @@ widgetConfigs.chart = [{
     }].forEach(function(s){
             s.period = '1 hour';
             s.statistics = 'sum';
-            s.metric = 'sml.power-consumed';
+            s.metric = metricValue;
         })
 }
 , {
@@ -60,7 +61,7 @@ widgetConfigs.chart = [{
     retaintimespan: true,
     series: [{
         widthUnits: '2',
-        metric: 'sml.power-consumed',
+        metric: metricValue,
         label: 'Today',
         color: 'limegreen',
         period: '1 day',
@@ -80,3 +81,4 @@ widgetConfigs.chart = [{
     series: []
 
 }]
+
