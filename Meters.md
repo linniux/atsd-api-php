@@ -61,9 +61,9 @@ var metricValue = "sml.power-consumed";
 ### Users-Group.
 To define users group your need to modify ```atsd-api-php/meters/users-group.ini``` file. 
 
-users-group.ini example:
+```users-group.ini``` example:
 ```bash
-user-to-group]
+[user-to-group]
 admin = org-all-entities
 user-001 = org-001-entities
 user-002 = org-002-entities
