@@ -76,15 +76,18 @@ Once in composer.json, specify the following:
 [AtsdClientSeriesExample][atsd-series-example]
 
 ### Client Configuration
+In atsd-api-php/atsdPHP/HttpClient.php:
 ```php
-$iniArray = parse_ini_file("atsd.ini");
+const CONFIG = 'atsd.ini';
+...
+$iniArray = parse_ini_file(self::config);
 ```
+Do not forget to specify the right username and password in atsd.ini (```atsd-api-php/atsdPHP/atsd.ini```)
 
 ### Metadata Processing
 ```php
-$iniArray = parse_ini_file("atsd.ini");
 $client = new HttpClient();
-$client->connect($iniArray["url"], $iniArray["username"], $iniArray["password"]);
+$client->connect();
 
 $expression = 'name like \'nurs*\''; 
 $tags = 'app, os';
@@ -118,9 +121,8 @@ $client->close();
 
 ### Data Queries
 ```php
-$iniArray = parse_ini_file("atsd.ini");
 $client = new HttpClient();
-$client->connect($iniArray["url"], $iniArray["username"], $iniArray["password"]);
+$client->connect();
 
 $queryClient = new Series($client);
 $queryClient->addDetailQuery('nurswgvml007', 'cpu_busy', 1424612226000, 1424612453000);
