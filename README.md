@@ -80,7 +80,7 @@ In atsd-api-php/atsdPHP/HttpClient.php:
 ```php
 const CONFIG = 'atsd.ini';
 ...
-$iniArray = parse_ini_file(self::config);
+$iniArray = parse_ini_file(self::CONFIG);
 ```
 Do not forget to specify the correct username and password in atsd.ini (```atsd-api-php/atsdPHP/atsd.ini```)
 
