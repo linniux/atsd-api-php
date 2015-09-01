@@ -10,7 +10,8 @@ To implement it, execute the following steps:
 Make sure you set the right ATSD user and password in atsd-api-php/atsdPHP/atsd.ini
 
 #### Check connection
-Navigate to the following URL: ```yourDomainName/atsd-api-php/examples/testConnection.php```. 
+Navigate to the following URL: ```yourDomainName/atsd-api-php/examples/testConnection.php```.
+
 Make sure that application response is "Connection success.".
 
 #### Enable digest authentication on your apache server:
