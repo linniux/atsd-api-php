@@ -10,8 +10,7 @@ To implement it, execute the following steps:
 Make sure you set the right ATSD user and password in atsd-api-php/atsdPHP/atsd.ini
 
 #### Check connection
-Navigate to the following URL:
-```yourDomainName/atsd-api-php/examples/testConnection.php```. 
+Navigate to the following URL: ```yourDomainName/atsd-api-php/examples/testConnection.php```. 
 Make sure that application response is "Connection success.".
 
 #### Enable digest authentication on your apache server:
@@ -19,7 +18,6 @@ Make sure that application response is "Connection success.".
 $ sudo a2enmod auth_digest
 $ sudo service apache2 restart
 ```
-
 #### Install ```apache2-utils``` package to use ```htdigest``` utility (required to generate the authentication file)
 ```bash
 $ sudo apt-get install apache2-utils
