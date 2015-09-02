@@ -49,7 +49,7 @@ Make sure that rewrite mode is enabled on your server, or enable it and restart 
 $ sudo a2enmod rewrite
 $ sudo service apache2 restart
 ```
-Also you should set AllowOverride to All in your host configuration file, for example:
+Verify that AllowOverride directive is set to All in Apache configuration files:
 ```
 <Directory /var/www/>
     Options Indexes FollowSymLinks
