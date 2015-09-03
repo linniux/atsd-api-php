@@ -38,17 +38,15 @@ Before you begin using ATSD Client for PHP, you need to install a copy of the [A
 
 Minimum requirements for running the ATSD Client: PHP 5.3.2+, php5-curl
 
-* [Windows installation][windows-install]
-
-Installing the ATSD Client:
-
+## Installing the ATSD Client
+### Linux
+- From source:
 ```shell
 git clone https://github.com/axibase/atsd-api-php.git
 mv atsd-api-php /{your_documentroot_folder}/
-cd /{you_documentroot_folder}/atsd-api-php/examples
-firefox *.php
 ```
-## Composer
+- Composer
+
 Once in composer.json, specify the following:
 ```javascript
 {
@@ -57,6 +55,26 @@ Once in composer.json, specify the following:
     }
 }
 ```
+
+### Windows
+- [Windows installation][windows-install]
+
+
+## Configure Credentials
+
+Specify the correct username and password in atsd.ini (```atsd-api-php/atsdPHP/atsd.ini```):
+
+```shell
+url = http://nur.axibase.com:8088
+username = [[username]]
+password = [[password]]
+```
+
+## Check connection
+Navigate to the following URL: ```yourDomainName/atsd-api-php/examples/testConnection.php```.
+
+Make sure that application response is "Connection success.".
+
 ## Examples
 
 [AtsdClientBasicExample][atsd-basic-example]
@@ -75,16 +93,7 @@ Once in composer.json, specify the following:
 
 [AtsdClientSeriesExample][atsd-series-example]
 
-### Client Configuration
-In atsd-api-php/atsdPHP/HttpClient.php:
-```php
-const CONFIG = 'atsd.ini';
-...
-$iniArray = parse_ini_file(self::CONFIG);
-```
-Do not forget to specify the correct username and password in atsd.ini (```atsd-api-php/atsdPHP/atsd.ini```)
-
-### Metadata Processing
+### Metadata Query
 ```php
 $client = new HttpClient();
 $client->connect();
@@ -119,7 +128,7 @@ Utils::render(array($entitiesTable, $entityTable, $metricsTable));
 $client->close();
 ```
 
-### Data Queries
+### Series Query
 ```php
 $client = new HttpClient();
 $client->connect();
@@ -141,7 +150,7 @@ Utils::render($tables);
 $client->close();
 ```
 
-### Series Queries
+### Custom Query
 You are able to customize your series query to use <a target="_blank" href="http://axibase.com/atsd/api/#aggregated-example">aggregate functionality</a> using the following syntax:
 ```php
 $queryClient->addQuery("Entity1", "Metric1", array(
