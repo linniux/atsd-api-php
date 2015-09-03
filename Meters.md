@@ -1,17 +1,17 @@
-# Meters application. 
+# Meters application
 
 This application shows you how to use atsd-api-php client with a real use case.
 Read more about this use case on [axibase.com]
 
 To implement it, execute the following steps:
 
-## Install [atsd-api-php] client. 
+## Install [atsd-api-php] client
 
 Make sure you set the right ATSD user and password in atsd-api-php/atsdPHP/atsd.ini
 
 ## Create User Accounts
 
-To create the users who will be authorized to access this application, run the following commands
+To create the users who will be authorized to access this application, run the following commands:
 
 ```bash
 $ touch atsd-api-php/meters/.htpasswd
@@ -30,13 +30,11 @@ To change displayed and reported metrics modify the ```atsd-api-php/meters/js/me
 var metricValue = "sml.power-consumed";
 ```
 
-- Create entity groups
-
-Create the following entity groups in ATSD:
-- org-all-entities
-- org-001-entities
-- org-002-entities
-- org-none-entities
+- Create the following entity groups in ATSD:
+    - org-all-entities
+    - org-001-entities
+    - org-002-entities
+    - org-none-entities
 
 Populate the groups with entities collecting the selected metric.
 
@@ -66,7 +64,7 @@ $ sudo apt-get install apache2-utils
 AuthUserFile "documentRoot/atsd-api-php/meters/.htpasswd"
 ```
 
-## Enable digest authentication and rewrite module on your apache server:
+## Enable digest authentication and rewrite module on your apache server
 ```bash
 $ sudo a2enmod auth_digest
 $ sudo a2enmod rewrite
@@ -83,7 +81,7 @@ Verify that AllowOverride directive is set to All in Apache configuration file:
 ```
 
 
-## Access the application.
+## Access the application
 You can access the application on the following URL:
 yourDomainName/atsd-api-php/meters/
 
