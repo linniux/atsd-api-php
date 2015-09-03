@@ -40,7 +40,7 @@ To change displayed and reported metrics modify the ```atsd-api-php/meters/js/me
 var metricValue = "sml.power-consumed";
 ```
 
-- Create the following entity groups in ATSD:
+- Create the following entity groups in ATSD UI - navigate to Entities -> Entity Groups -> Create:
     - org-all-entities
     - org-001-entities
     - org-002-entities
@@ -60,8 +60,6 @@ user-001 = org-001-entities
 user-002 = org-002-entities
 user-guest = org-none-entities
 ```
-Entity groups are configured in ATSD web interface.
-
 
 ## Enable digest authentication and rewrite module on your apache server
 ```bash
