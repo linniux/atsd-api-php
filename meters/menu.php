@@ -8,7 +8,7 @@
         <td></td>
     </tr>
     <tr>
-    <td style="padding-top: 10px; padding-right: 20px" valign="top">
+    <td id="menu" style="padding-top: 10px; padding-right: 20px" valign="top">
         <form method="POST" action="index.php" style="white-space: nowrap">
             <?php foreach($_SESSION['entities'] as $entity): ?>
                 <input type="radio" <?=($request->getSelectedEntity() == $entity)?"checked":""?>

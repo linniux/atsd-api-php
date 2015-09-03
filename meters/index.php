@@ -5,7 +5,7 @@ $title = "Meter Report";
 <?php include_once("./header.php")?>
 <table>
     <tbody>
-       <?php include_once("./menu.php");?>
+       <?php include_once("./menu.php")?>
        <td>
            <div>
                <table style="width:100%">
@@ -52,6 +52,7 @@ $title = "Meter Report";
 <script>
     function onBodyLoad(){
         generateWidgets("<?=$request->getSelectedEntity()?>");
+        resizeWidgets("<?=$request->getSelectedEntity()?>");
     }
 </script>
 </body>

@@ -22,7 +22,8 @@ $title = "Summary Report"
 </table>
 <script>
     function onBodyLoad(){
-            generateSummary();
+        generateSummary();
+        resizeSummary();
     }
 </script>
 
