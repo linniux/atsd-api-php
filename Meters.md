@@ -11,7 +11,12 @@ Make sure you set the right ATSD user and password in atsd-api-php/atsdPHP/atsd.
 
 ## Create User Accounts
 
-To create the users who will be authorized to access this application, run the following commands:
+- Install ```apache2-utils``` package to use ```htdigest``` utility (required to generate the authentication file):
+```bash
+$ sudo apt-get install apache2-utils
+```
+
+- To create the users who will be authorized to access this application, run the following commands:
 
 ```bash
 $ touch atsd-api-php/meters/.htpasswd
@@ -19,6 +24,11 @@ $ htdigest atsd-api-php/meters/.htpasswd meters admin
 $ htdigest atsd-api-php/meters/.htpasswd meters user-001
 $ htdigest atsd-api-php/meters/.htpasswd meters user-002
 $ htdigest atsd-api-php/meters/.htpasswd meters guest
+```
+
+- Modify ```atsd-api-php/meters/.htaccess``` and specify the correct path to the ```.htpasswd``` file:
+```
+AuthUserFile "documentRoot/atsd-api-php/meters/.htpasswd"
 ```
 
 ## Configure application
@@ -52,17 +62,6 @@ user-guest = org-none-entities
 ```
 Entity groups are configured in ATSD web interface.
 
-- Install ```apache2-utils``` package to use ```htdigest``` utility (required to generate the authentication file):
-```bash
-$ sudo apt-get install apache2-utils
-```
-
-
-```
-- Modify ```atsd-api-php/meters/.htaccess``` and specify the correct path to the ```.htpasswd``` file:
-```
-AuthUserFile "documentRoot/atsd-api-php/meters/.htpasswd"
-```
 
 ## Enable digest authentication and rewrite module on your apache server
 ```bash
