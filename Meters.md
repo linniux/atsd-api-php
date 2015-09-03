@@ -1,7 +1,7 @@
 # Meters application
 
 This application shows you how to use atsd-api-php client with a real use case.
-Read more about this use case on [axibase.com]
+Read more about this use case on [axibase.com](http://axibase.com/products/axibase-time-series-database/visualization/embedded-widgets/external-application/)
 
 To implement it, execute the following steps:
 
@@ -103,4 +103,3 @@ Internal Server Error
 The server encountered an internal error or misconfiguration and was unable to complete your request.
 ```
 
-[axibase.com]:http://axibase.com/products/axibase-time-series-database/visualization/embedded-widgets/external-application/
