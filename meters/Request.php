@@ -9,9 +9,14 @@ class Request {
     private $selectedEntity;
     private $summary;
     private $timezone;
+    private $error = null;
 
     function isSummary() {
         return $this->summary;
+    }
+
+    function getError() {
+        return $this->error;
     }
 
     function getSelectedEntity() {
@@ -24,12 +29,6 @@ class Request {
 
     function __construct() {
         session_start();
-        if(array_key_exists('logout', $_POST) && $_POST['logout'] == 'true') {
-            session_unset();
-            session_destroy();
-            header('HTTP/1.1 401 Unauthorized');
-            header('Refresh: 0');
-        }
         if(!array_key_exists('PHP_AUTH_USER', $_SERVER)) {
             exit("Authentication required");
         }
@@ -59,11 +58,18 @@ class Request {
         $httpClient = new HttpClient();
         $httpClient->connect();
         $entityGroups = new EntityGroups($httpClient);
-        $response = $entityGroups->findEntities($userToGroup[$user]);
-        foreach($response as $entity) {
-            $entities[] = $entity["name"];
+        try {
+            $response = $entityGroups->findEntities($userToGroup[$user]);
+            foreach($response as $entity) {
+                $entities[] = $entity["name"];
+            }
+            $_SESSION['entities'] = $entities;
+        } catch (Exception $e) {
+            $matches = array();
+            preg_match_all("/^.*Exception: (.*$)/", $e->getMessage(), $matches);
+            $this->error = "ERROR: " . $matches[1][0];
+
         }
-        $_SESSION['entities'] = $entities;
     }
 
     function formatEndTime($intervalType, $num, $view = false) {
