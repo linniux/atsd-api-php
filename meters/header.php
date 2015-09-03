@@ -28,7 +28,7 @@
     <script type="text/javascript" src="js/initialize.js"></script>
     <script type="text/javascript" src="js/meters.js"></script>
 </head>
-<body onLoad="onBodyLoad()" onresize=resizeWidgets("<?=$request->getSelectedEntity()?>")>
+<body onLoad="onBodyLoad()" onresize=<?=$request->isSummary()?"resizeSummary":"resizeWidgets"?>("<?=$request->getSelectedEntity()?>")>
 <table width="100%">
     <tbody >
     <tr style="white-space: nowrap;">
