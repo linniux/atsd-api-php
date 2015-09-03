@@ -47,7 +47,7 @@ mv atsd-api-php /{your_documentroot_folder}/
 ```
 - Composer
 
-Once in composer.json, specify the following:
+Once in ```composer.json```, specify the following:
 ```javascript
 {
 "require": {
@@ -62,7 +62,7 @@ Once in composer.json, specify the following:
 
 ## Configure Credentials
 
-Specify the correct username and password in atsd.ini (```atsd-api-php/atsdPHP/atsd.ini```):
+Specify the correct credentials in atsd.ini (```atsd-api-php/atsdPHP/atsd.ini```):
 
 ```shell
 url = http://nur.axibase.com:8088
