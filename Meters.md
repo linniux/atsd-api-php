@@ -5,7 +5,7 @@ Read more about this use case on [axibase.com]
 
 To implement it, execute the following steps:
 
-## Install [atsd-api-php] client
+## Install [atsd-api-php](https://github.com/axibase/atsd-api-php#installing-the-atsd-client) client
 
 Make sure you set the right ATSD user and password in atsd-api-php/atsdPHP/atsd.ini
 
@@ -103,5 +103,4 @@ Internal Server Error
 The server encountered an internal error or misconfiguration and was unable to complete your request.
 ```
 
-[atsd-api-php]:https://github.com/axibase/atsd-api-php#installing-the-atsd-client
 [axibase.com]:http://axibase.com/products/axibase-time-series-database/visualization/embedded-widgets/external-application/
