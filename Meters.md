@@ -61,6 +61,7 @@ user-002 = org-002-entities
 user-guest = org-none-entities
 ```
 
+
 ## Enable digest authentication and rewrite module on your apache server
 ```bash
 $ sudo a2enmod auth_digest
