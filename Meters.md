@@ -9,6 +9,18 @@ To implement it, execute the following steps:
 
 Make sure you set the right ATSD user and password in atsd-api-php/atsdPHP/atsd.ini
 
+## Create User Accounts
+
+To create the users who will be authorized to access this application, run the following commands
+
+```bash
+$ touch atsd-api-php/meters/.htpasswd
+$ htdigest atsd-api-php/meters/.htpasswd meters admin
+$ htdigest atsd-api-php/meters/.htpasswd meters user-001
+$ htdigest atsd-api-php/meters/.htpasswd meters user-002
+$ htdigest atsd-api-php/meters/.htpasswd meters guest
+```
+
 ## Configure application
 
 - Configure metrics
@@ -18,9 +30,19 @@ To change displayed and reported metrics modify the ```atsd-api-php/meters/js/me
 var metricValue = "sml.power-consumed";
 ```
 
+- Create entity groups
+
+Create the following entity groups in ATSD:
+- org-all-entities
+- org-001-entities
+- org-002-entities
+- org-none-entities
+
+Populate the groups with entities collecting the selected metric.
+
 - Configure Users-Group
 
-To define users group your need to modify ```atsd-api-php/meters/users-group.ini``` file. 
+To define user-group mappings your need to modify ```atsd-api-php/meters/users-group.ini``` file. 
 
 ```users-group.ini``` example:
 ```shell
@@ -37,13 +59,7 @@ Entity groups are configured in ATSD web interface.
 $ sudo apt-get install apache2-utils
 ```
 
-- Generate password file:
-```bash
-$ touch atsd-api-php/meters/.htpasswd
-$ htdigest atsd-api-php/meters/.htpasswd meters admin
-$ htdigest atsd-api-php/meters/.htpasswd meters user-001
-$ htdigest atsd-api-php/meters/.htpasswd meters user-002
-$ htdigest atsd-api-php/meters/.htpasswd meters guest
+
 ```
 - Modify ```atsd-api-php/meters/.htaccess``` and specify the correct path to the ```.htpasswd``` file:
 ```
