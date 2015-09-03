@@ -1,8 +1,12 @@
 var metricValue = "sml.power-consumed";
 var widgetConfigs = {};
+var widgetDefaultSize = {
+    width: 300,
+    height: 300
+};
 
 widgetConfigs.text = [{
-    initSize: { width: 200, height: 300},
+    initSize: widgetDefaultSize,
     title: 'Current Usage',
     timespan: '1 hour',
     timezone: 'UTC',
@@ -18,7 +22,7 @@ widgetConfigs.text = [{
 }]
 
 widgetConfigs.chart = [{
-    initSize: { width: 800, height: 300 },
+    initSize: widgetDefaultSize,
     title: 'Daily Power Usage, Hourly Total',
     timespan: '1 day',
     timezone: 'UTC',
@@ -30,7 +34,7 @@ widgetConfigs.chart = [{
     style: 'padding: 20px',
     series: [{
         label: 'Today',
-        color: 'limegreen'
+        color: 'green'
     }, {
         label: 'Yesterday',
         timeoffset: '1 day',
@@ -46,7 +50,7 @@ widgetConfigs.chart = [{
         })
 }
 , {
-    initSize: { width: 1050, height: 300},
+    initSize: widgetDefaultSize,
     title: 'Monthly Power Usage, Daily Total',
     timespan: '1 month',
     timezone: 'UTC',
@@ -63,12 +67,12 @@ widgetConfigs.chart = [{
         widthUnits: '2',
         metric: metricValue,
         label: 'Today',
-        color: 'limegreen',
+        color: 'green',
         period: '1 day',
         statistics: 'sum'
     }]
 },{
-    initSize: { width: 1050, height: 300},
+    initSize: widgetDefaultSize,
     timespan: '1 month',
     timezone: 'UTC',
     endtime: 'next_month',
