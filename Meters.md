@@ -12,12 +12,14 @@ Make sure you set the right ATSD user and password in atsd-api-php/atsdPHP/atsd.
 ## Configure application
 
 - Configure metrics
+
 To change displayed and reported metrics modify the ```atsd-api-php/meters/js/meters-config.js``` file and set your collected metric from ATSD on the first line:
 ```
 var metricValue = "sml.power-consumed";
 ```
 
 - Configure Users-Group
+
 To define users group your need to modify ```atsd-api-php/meters/users-group.ini``` file. 
 
 ```users-group.ini``` example:
@@ -30,7 +32,7 @@ user-guest = org-none-entities
 ```
 Entity groups are configured in ATSD web interface.
 
-- Install ```apache2-utils``` package to use ```htdigest``` utility (required to generate the authentication file)
+- Install ```apache2-utils``` package to use ```htdigest``` utility (required to generate the authentication file):
 ```bash
 $ sudo apt-get install apache2-utils
 ```
@@ -66,10 +68,10 @@ Verify that AllowOverride directive is set to All in Apache configuration file:
 
 
 ## Access the application.
-You can access the applicattion on the following URL:
+You can access the application on the following URL:
 yourDomainName/atsd-api-php/meters/
 
-If you want to create a castum URL, create a new ```.htaccess``` file in your ```documentRoot``` directory with the following content:
+If you want to create a custom URL, create a new ```.htaccess``` file in your ```documentRoot``` directory with the following content:
 ```
 RewriteEngine On
 RewriteBase /
