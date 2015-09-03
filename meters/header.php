@@ -28,7 +28,7 @@
     <script type="text/javascript" src="js/initialize.js"></script>
     <script type="text/javascript" src="js/meters.js"></script>
 </head>
-<body onLoad="onBodyLoad()">
+<body onLoad="onBodyLoad()" onresize=resizeWidgets("<?=$request->getSelectedEntity()?>")>
 <table width="100%">
     <tbody >
     <tr style="white-space: nowrap;">
@@ -39,8 +39,6 @@
             <form method="POST" action="index.php">
                 User:
                 <b><?=htmlspecialchars($_SESSION['user'])?></b>
-                <input type="hidden" value="true" name="logout">
-                <button type="submit">Logout</button>
             </form>
             <div style="font-size: 10px; text-align: right">All times specified in <?=$request->getTimezone()?>
             </div>
@@ -48,3 +46,6 @@
     </tr>
     </tbody>
 </table>
+<?php if($request->getError() !== null) {
+    exit($request->getError());
+}
