@@ -11,7 +11,6 @@ function resizeWidgets(entity) {
             for(var i = 0; i < configs.length; i++) {
                 if(type != 'chart' || i != 2) {
                     var className = ["widget", type, i].join('-');
-                    console.log("type: " + type + "; id: " + i);
 //                    console.log(document.getElementsByClassName(className)[0].);
                     var widget = getWidget(className);
                     size = {
