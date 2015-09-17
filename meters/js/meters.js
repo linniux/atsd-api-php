@@ -12,6 +12,8 @@ function resizeWidgets(entity) {
                 if(type != 'chart' || i != 2) {
                     var className = ["widget", type, i].join('-');
                     var widget = getWidget(className);
+//                    console.log(className);
+//                    console.log(widget);
                     size = {
                         width: getActualWidth(type, i),
                         height: 300
@@ -82,7 +84,7 @@ function generateWidgets(entity){
                         height: 300
                     }
                     configs[i].initSize = size;
-                    updateWidget(configs[i], type, i);
+                    updateWidget(configs[i], [type, i].join('-'));
                 }
             }
         }
@@ -116,7 +118,7 @@ function generateSummary() {
         };
         config.series.push(serie);
     }
-    updateWidget(config, 'chart', 2);
+    updateWidget(config, 'chart-2');
 }
 global.getReport = getReport;
 global.generateSummary = generateSummary;

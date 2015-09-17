@@ -6,6 +6,8 @@ var widgetDefaultSize = {
 };
 
 widgetConfigs.text = [{
+    url: "",
+    type: 'text',
     initSize: widgetDefaultSize,
     title: 'Current Usage',
     timespan: '1 hour',
@@ -22,6 +24,8 @@ widgetConfigs.text = [{
 }]
 
 widgetConfigs.chart = [{
+    url: "",
+    type: 'chart',
     initSize: widgetDefaultSize,
     title: 'Daily Power Usage, Hourly Total',
     timespan: '1 day',
@@ -50,6 +54,8 @@ widgetConfigs.chart = [{
         })
 }
 , {
+    url: "",
+    type: 'chart',
     initSize: widgetDefaultSize,
     title: 'Monthly Power Usage, Daily Total',
     timespan: '1 month',
@@ -72,6 +78,8 @@ widgetConfigs.chart = [{
         statistics: 'sum'
     }]
 },{
+    url: "",
+    type: 'chart',
     initSize: widgetDefaultSize,
     timespan: '1 month',
     timezone: 'UTC',
