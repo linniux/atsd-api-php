@@ -73,7 +73,7 @@ $(function () {
             });
             $('#performanceTab').append('</div></div>');
             iterator = [++iterator[0]];
-            applyPerformanceWidgets(false);
+            applyPerformanceWidgets();
         });
     }
 
