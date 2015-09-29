@@ -1,6 +1,6 @@
 AuthType Digest
 AuthName performance
-AuthUserFile "/home/sild/code/svn/axibase/AxibaseAPI/atsd-api-php/performance/.htpasswd"
+AuthUserFile "atsd-api-php/performance/.htpasswd"
 Require valid-user
 <Files ~ "^.*\.ini$">
     Order allow,deny
