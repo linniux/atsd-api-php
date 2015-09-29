@@ -1,4 +1,4 @@
-Math.random();//TODO debug
+//Math.random();//to debug
 
 $(function () {
     var usedMetricsSet = new Array();
@@ -6,6 +6,7 @@ $(function () {
     var entity = $('#menu select option:selected').val();
     var availableMetrics = $('#availableMetrics').data('metrics');
     var iterator = [0];
+    var firstBlock = [true];
 
     window.history.pushState(null, null, window.location.search.replace('&refresh=true', ''));
 
@@ -18,15 +19,13 @@ $(function () {
         "scollector_mssql.config"
     ];
 
-    applyPropertiesWidgets();
-
     applyPerformanceWidgets();
+
+    applyPropertiesWidgets();
 
     applyConfigurationWidget();
 
     setUpEvents();
-
-
 
     function applyPerformanceWidgets() {
         if (configNames[iterator[0]] == null) {
@@ -47,17 +46,19 @@ $(function () {
                 });
                 if (metricsSet.length > 0 && !existInArray(metricsSet, usedMetricsSet, configNode.title)) {
                     if (!headAdded) {
-
-                        $('#performanceTab').append(
-
-                                '<div class="panel panel-default">' +
-                                    '<div class="panel-heading">' +
-                                        '<b>' + portalConfig.title + '</b>' +
-                                    '</div>' +
-                                    '<div class="panel-collapse"></div>' +
-                                '</div>'
-
-                        );
+                        html = '<div class="panel panel-default">' +
+                        '<div class="panel-heading">' +
+                        '<b>' + portalConfig.title + '</b>' +
+                        '</div>' +
+                        '<div class="panel-collapse" style="display: [[DISPLAY]]"></div>' +
+                        '</div>';
+                        if(firstBlock[0]) {
+                            html = html.replace('[[DISPLAY]]', 'block');
+                            firstBlock = [false];
+                        } else {
+                            html = html.replace('[[DISPLAY]]', 'none');
+                        }
+                        $('#performanceTab').append(html);
                         headAdded = true;
                     }
                     usedMetricsSet.push(metricsSet);
@@ -72,7 +73,7 @@ $(function () {
             });
             $('#performanceTab').append('</div></div>');
             iterator = [++iterator[0]];
-            applyPerformanceWidgets();
+            applyPerformanceWidgets(false);
         });
     }
 

@@ -16,8 +16,8 @@
 -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-<script src="http://nur.axibase.com:8088/web/js/jquery-1.7.1.min.js"></script>
-<script src="http://nur.axibase.com:8088/web/js/bootstrap.min.js"></script>
+<script src="https://nur.axibase.com:24443/web/js/jquery-1.7.1.min.js"></script>
+<script src="https://nur.axibase.com:24443/web/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://axibase.com/atsd/portalFiddle/portal/JavaScript/d3.min.js"></script>
 <script type="text/javascript" src="https://axibase.com/atsd/portalFiddle/portal/JavaScript/portal_init.js"></script>
 <script type="text/javascript" src="https://lab.axibase.com/chartlab/portal/JavaScript/charts.min.js"></script>
