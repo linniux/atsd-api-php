@@ -23,10 +23,6 @@ class EntityGroups extends AtsdClient {
     const ENTITIES_FOR_GROUP_URI = '/entity-groups/[[group]]/entities?';
     protected $queryUri;
 
-    function __construct($client) {
-        parent::__construct($client);
-    }
-
     function findAll($getParameters = array()) {
         $this->queryUri = EntityGroups::GROUPS_URI;
         $this->applyGetParameters($getParameters);
@@ -36,6 +32,7 @@ class EntityGroups extends AtsdClient {
     function findEntities($group, $getParameters = array()) {
         $this->queryUri = str_replace('[[group]]', urlencode($group), EntityGroups::ENTITIES_FOR_GROUP_URI);
         $this->applyGetParameters($getParameters);
+
         return $this->query($this->queryUri . $this->getParams);
     }
 

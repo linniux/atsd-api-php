@@ -21,10 +21,6 @@ class Csv  extends AtsdClient {
     const EXPORT_URI = "/export?";
     protected $queryUri;
 
-    function __construct($client) {
-        parent::__construct($client);
-    }
-
     public function export($entity, $metric, $endDate, $interval, $optional = array() ) {
         $this->postParams = array();
         $this->postParams['e'] = $entity;

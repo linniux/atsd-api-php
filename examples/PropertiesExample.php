@@ -19,19 +19,17 @@ require_once '../atsdPHP/models/Properties.php';
 require_once '../atsdPHP/HttpClient.php';
 require_once '../atsdPHP/Utils.php';
 
-$client = new HttpClient();
-$client->connect();
-
 $type = "System";
 $entity = "awsswgvml001";
 
-$queryClient = new Properties($client);
+$queryClient = new Properties(HttpClient::getInstance());
 
 $json = '{"queries":[{"type":"' . $type . '","entity":"' . $entity . '"}]}';
-$response = $queryClient->find(json_decode($json));
+$response = $queryClient->find($json);
+
+HttpClient::getInstance()->close();
 
 $viewConfig = new ViewConfiguration("Properties for entity: " . $entity . "; type: " . $type, "properties");
 $propertiesTable = Utils::propertyAsHtmlTable($response, $viewConfig);
 
 Utils::render(array($propertiesTable));
-$client->close();

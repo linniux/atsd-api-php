@@ -23,10 +23,6 @@ class Metrics  extends AtsdClient {
     const ENTITY_AND_TAGS_FOR_METRIC_URI = '/metrics/[[metric]]/entity-and-tags?';
     protected $queryUri;
 
-    function __construct($client) {
-        parent::__construct($client);
-    }
-
     function findEntityAndTags($metric, $entity = null) {
         $this->queryUri = str_replace('[[metric]]', urlencode($metric), Metrics::ENTITY_AND_TAGS_FOR_METRIC_URI);
         if($entity) {

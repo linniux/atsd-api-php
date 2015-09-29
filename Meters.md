@@ -35,7 +35,7 @@ AuthUserFile "documentRoot/atsd-api-php/meters/.htpasswd"
 
 - Configure metrics
 
-To change displayed and reported metrics modify the ```atsd-api-php/meters/js/meters-config.js``` file and set your collected metric from ATSD on the first line:
+To change displayed and reported metrics modify the ```atsd-api-php/meters/js/configs.js``` file and set your collected metric from ATSD on the first line:
 ```
 var metricValue = "sml.power-consumed";
 ```

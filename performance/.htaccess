@@ -1,0 +1,8 @@
+AuthType Digest
+AuthName performance
+AuthUserFile "atsd-api-php/performance/.htpasswd"
+Require valid-user
+<Files ~ "^.*\.ini$">
+    Order allow,deny
+    Deny from all
+</Files>

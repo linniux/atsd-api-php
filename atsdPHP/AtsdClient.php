@@ -22,7 +22,7 @@ namespace axibase\atsdPHP {
         protected $getParams;
         protected $postParams;
 
-        function __construct($client) {
+        function __construct(HttpClient $client) {
             $this->client = $client;
             $this->api = "/api/v1";
             $this->getParams = "";

@@ -18,17 +18,16 @@ namespace axibase\atsdPHP;
 require_once '../atsdPHP/models/Entities.php';
 require_once '../atsdPHP/HttpClient.php';
 
-$client = new HttpClient();
-$client->connect();
-
 $expression = 'name like \'*\'';
 $limit = 1;
 
-$queryClient = new Entities($client);
+$queryClient = new Entities(HttpClient::getInstance());
 
 $params = array("limit" => $limit, 'expression' => $expression);
 $responseEntities = $queryClient->findAll($params);
-$client->close();
+
+HttpClient::getInstance()->close();
+
 if(empty($responseEntities)) {
     exit("Connection failed!");
 }

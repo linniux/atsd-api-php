@@ -19,14 +19,11 @@ require_once '../atsdPHP/models/Entities.php';
 require_once '../atsdPHP/HttpClient.php';
 require_once '../atsdPHP/Utils.php';
 
-$client = new HttpClient();
-$client->connect();
-
 $expression = 'name like \'nurswgvmw*\'';
 $tags = 'app, os';
 $limit = 10;
 
-$queryClient = new Entities($client);
+$queryClient = new Entities(HttpClient::getInstance());
 
 $params = array("limit" => $limit, 'expression' => $expression, 'tags' => $tags );
 $responseEntities = $queryClient->findAll($params);
@@ -43,10 +40,11 @@ $entityTable = Utils::arrayAsHtmlTable(array($responseEntity), $viewConfig);
 $params = array("limit" => $limit);
 $responseMetrics = $queryClient->findMetrics($entity, $params);
 
+HttpClient::getInstance()->close();
+
 $viewConfig = new ViewConfiguration('Metrics for entity: ' . $entity, "metrics");
 $metricsTable = Utils::arrayAsHtmlTable($responseMetrics, $viewConfig);
 
 Utils::render(array($entitiesTable, $entityTable, $metricsTable));
 
 
-$client->close();

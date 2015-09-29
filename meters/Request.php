@@ -29,6 +29,7 @@ class Request {
 
     function __construct() {
         session_start();
+
         if(!array_key_exists('PHP_AUTH_USER', $_SERVER)) {
             exit("Authentication required");
         }
@@ -44,7 +45,7 @@ class Request {
         $this->summary = (array_key_exists('summary', $_REQUEST) && $_REQUEST['summary'] == 'true');
 
         if(!$this->summary && array_key_exists('entity', $_REQUEST)) {
-            $this->selectedEntity = $_POST['entity'];
+            $this->selectedEntity = $_REQUEST['entity'];
         }
     }
 
@@ -55,9 +56,7 @@ class Request {
             exit("Can not find group for user " . $user);
         }
         $entities = array();
-        $httpClient = new HttpClient();
-        $httpClient->connect();
-        $entityGroups = new EntityGroups($httpClient);
+        $entityGroups = new EntityGroups(HttpClient::getInstance());
         try {
             $response = $entityGroups->findEntities($userToGroup[$user]);
             foreach($response as $entity) {

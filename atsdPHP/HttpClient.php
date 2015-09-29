@@ -14,87 +14,78 @@
 * permissions and limitations under the License.
 */
 
-namespace axibase\atsdPHP {
-    /**
-     * Class ConnectionManager
-     * @package axibase\atsdPHP
-     */
-    class HttpClient {
-        const CONFIG = 'atsd.ini';
+namespace axibase\atsdPHP;
+class HttpClient {
+    const CONFIG = 'atsd.ini';
+    private static $instance = null;
+    private static $curlOpts = array(
+        CURLOPT_HTTPHEADER => array('content-Type: application/json', 'charset=utf-8', 'Connection: keep-alive'),
+        CURLOPT_RETURNTRANSFER => true
+    );
+    private $url;
+    private $username;
+    private $password;
+    private $curlHandler;
 
-        function __construct() {
-            if(!function_exists('curl_version')) {
-                echo "ERROR: can not find curl extension.";
-                die();
-            }
-            $this->defOptions = array(
-                CURLOPT_HTTPHEADER => array('content-Type: application/json', 'charset=utf-8', 'Connection: keep-alive'),
-                CURLOPT_RETURNTRANSFER => true
-            );
-            $iniArray = parse_ini_file(self::CONFIG);
-            if(array_key_exists('url', $iniArray) && array_key_exists('username', $iniArray) && array_key_exists('password', $iniArray)) {
-                $this->url = $iniArray["url"];
-                $this->username = $iniArray["username"];
-                $this->password =  $iniArray["password"];
-            } else {
-                throw new \Exception("url, username or password is not set.");
-            }
+
+    public static function getInstance() {
+        if (self::$instance == null) {
+            self::$instance = new HttpClient();
         }
-        /**
-         * Init connection with specified url.
-         *
-         * @param string $url atsd base url (Example: "http://atsd.example.com:8090")
-         * @param string $username username
-         * @param string $password atsd user's password
-         */
-        public function connect() {
-            $this->curlHandler = curl_init();
-            curl_setopt_array($this->curlHandler, $this->defOptions);
-            curl_setopt($this->curlHandler, CURLOPT_USERPWD, "$this->username:$this->password");
+        return self::$instance;
+    }
+
+    private function __construct() {
+
+        if (!function_exists('curl_version')) {
+            echo "ERROR: can not find curl extension.";
+            die();
         }
+        $iniArray = parse_ini_file(self::CONFIG);
+        if (array_key_exists('url', $iniArray) && array_key_exists('username', $iniArray) && array_key_exists('password', $iniArray)) {
+            $this->url = $iniArray["url"];
+            $this->username = $iniArray["username"];
+            $this->password = $iniArray["password"];
+        } else {
+            throw new \Exception("url, username or password is not set.");
+        }
+        $this->curlHandler = curl_init();
+        curl_setopt_array($this->curlHandler, self::$curlOpts);
+        curl_setopt($this->curlHandler, CURLOPT_USERPWD, "$this->username:$this->password");
+    }
 
-        public function query($uri, $postdata = null) {
-            if ($this->curlHandler == null) {
-                throw new \Exception("Need to connect first.");
-            }
-            if($postdata === null) {
-                curl_setopt($this->curlHandler, CURLOPT_POST, false);
-                curl_setopt($this->curlHandler, CURLOPT_URL, $this->url . $uri);
-            } else {
-                curl_setopt($this->curlHandler, CURLOPT_POST, true);
-                curl_setopt($this->curlHandler, CURLOPT_URL, $this->url . $uri);
-                curl_setopt($this->curlHandler, CURLOPT_POSTFIELDS, json_encode($postdata));
-            }
-            $response = curl_exec($this->curlHandler);
-            $responseContentType = curl_getinfo($this->curlHandler, CURLINFO_CONTENT_TYPE);
-            if(strpos($responseContentType, "json") !== false) {
-                $response = json_decode($response, true);
-                if ($response === null) {
-                    throw new \ErrorException("ERROR: " . var_export(curl_getinfo($this->curlHandler), true));
-                }
-                if (array_key_exists("error", $response) && isset($response["error"])) {
-                    throw new \ErrorException('ERROR: ' . $response['error']);
-
-                }
-            }
-            return $response;
+    public function query($uri, $postdata = null) {
+        if ($this->curlHandler == null) {
+            throw new \Exception("Need to connect first.");
+        }
+        if ($postdata === null) {
+            curl_setopt($this->curlHandler, CURLOPT_POST, false);
+            curl_setopt($this->curlHandler, CURLOPT_URL, $this->url . $uri);
+        } else {
+            curl_setopt($this->curlHandler, CURLOPT_POST, true);
+            curl_setopt($this->curlHandler, CURLOPT_URL, $this->url . $uri);
+            curl_setopt($this->curlHandler, CURLOPT_POSTFIELDS, json_encode($postdata));
         }
 
-        /**
-         *  Close current connection.
-         */
-        public function close() {
-            curl_close($this->curlHandler);
-            $this->curlHandler = null;
+        $response = curl_exec($this->curlHandler);
+        $responseContentType = curl_getinfo($this->curlHandler, CURLINFO_CONTENT_TYPE);
+        if (strpos($responseContentType, "json") !== false) {
+            $response = json_decode($response, true);
+            if ($response === null) {
+                throw new \ErrorException("ERROR: " . var_export(curl_getinfo($this->curlHandler), true));
+            }
+            if (array_key_exists("error", $response) && isset($response["error"])) {
+                throw new \ErrorException('ERROR: ' . $response['error']);
+
+            }
         }
+        return $response;
+    }
 
-
-        private $url;
-        private $username;
-        private $password;
-
-        private $curlHandler;
-
-        private $defOptions;
+    public function close() {
+        curl_close($this->curlHandler);
+        $this->curlHandler = null;
     }
 }
+
+

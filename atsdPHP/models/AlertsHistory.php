@@ -21,10 +21,6 @@ class AlertsHistory  extends AtsdClient {
     const HISTORY_URI = '/alerts/history';
     protected $queryUri;
 
-    function __construct($client) {
-        parent::__construct($client);
-    }
-
     function findHistory($jsonRequest) {
         $this->queryUri = AlertsHistory::HISTORY_URI;
         $this->postParams = $jsonRequest;

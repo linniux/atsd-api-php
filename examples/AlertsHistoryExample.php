@@ -19,19 +19,17 @@ require_once '../atsdPHP/models/AlertsHistory.php';
 require_once '../atsdPHP/HttpClient.php';
 require_once '../atsdPHP/Utils.php';
 
-$client = new HttpClient();
-$client->connect();
-
 $entity = "awsswgvml001"; 
 $limit = 5;
 
-$queryClient = new AlertsHistory($client);
+$queryClient = new AlertsHistory(HttpClient::getInstance());
 
 $jsonObj = json_decode('{"queries": [{"entity": "' . $entity . '", "limit":"' . $limit . '"}]}');
 $response = $queryClient->findHistory($jsonObj);
+
+HttpClient::getInstance()->close();
 
 $viewConfig = new ViewConfiguration("Alerts history for entity: " . $entity . "; limit: " . $limit, "alertsHistory", array('severity' => 'severity', 'alertOpenTime' => 'unixtimestamp', 'receivedTime' => 'unixtimestamp', 'time' => 'unixtimestamp'));
 $tbl = Utils::arrayAsHtmlTable($response, $viewConfig);
 
 Utils::render(array($tbl));
-$client->close();

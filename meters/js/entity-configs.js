@@ -1,14 +1,9 @@
 var metricValue = "sml.power-consumed";
-var widgetConfigs = {};
-var widgetDefaultSize = {
-    width: 300,
-    height: 300
-};
 
-widgetConfigs.text = [{
+currentUsageConfig = {
+    initSize: {width: 250, height: 300},
     url: "",
     type: 'text',
-    initSize: widgetDefaultSize,
     title: 'Current Usage',
     timespan: '1 hour',
     timezone: 'UTC',
@@ -21,12 +16,12 @@ widgetConfigs.text = [{
         statistics: 'sum',
         period: '1 hour'
     }]
-}]
+};
 
-widgetConfigs.chart = [{
+dailyUsageConfig = {
+    initSize: {width: 500, height: 300},
     url: "",
     type: 'chart',
-    initSize: widgetDefaultSize,
     title: 'Daily Power Usage, Hourly Total',
     timespan: '1 day',
     timezone: 'UTC',
@@ -52,11 +47,12 @@ widgetConfigs.chart = [{
             s.statistics = 'sum';
             s.metric = metricValue;
         })
-}
-, {
+};
+
+monthlyUsageConfig = {
+    initSize: {width: 800, height: 300},
     url: "",
     type: 'chart',
-    initSize: widgetDefaultSize,
     title: 'Monthly Power Usage, Daily Total',
     timespan: '1 month',
     timezone: 'UTC',
@@ -77,20 +73,4 @@ widgetConfigs.chart = [{
         period: '1 day',
         statistics: 'sum'
     }]
-},{
-    url: "",
-    type: 'chart',
-    initSize: widgetDefaultSize,
-    timespan: '1 month',
-    timezone: 'UTC',
-    endtime: 'next_month',
-    autoperiod: false,
-    format: getCfgFormat('watthour'),
-    dayformat: "%m/%d",
-    mode: 'columnstack',
-    path: 'ApiProxy.php',
-    style: 'padding: 20px',
-    series: []
-
-}]
-
+};

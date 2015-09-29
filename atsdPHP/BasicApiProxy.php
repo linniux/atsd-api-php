@@ -17,21 +17,33 @@
 namespace axibase\atsdPHP;
 require_once '../atsdPHP/HttpClient.php';
 require_once '../atsdPHP/models/Series.php';
+require_once '../atsdPHP/models/Properties.php';
 class BasicApiProxy {
-    protected function validate($string) {
+    protected function validateSeries($string) {
         return true;
     }
 
-    public function apiSeriesSimpleQuery($string) {
-        $httpClient = new HttpClient();
-        $httpClient->connect();
-        $seriesClient = new Series($httpClient);
-        if(!$this->validate($string)) {
+    protected function validateProperties($string) {
+        return true;
+    }
+
+    public function seriesJsonQuery($string) {
+        $seriesClient = new Series(HttpClient::getInstance());
+        if(!$this->validateSeries($string)) {
             return "";
         }
         $response = $seriesClient->simpleQuery($string);
         return $response;
 
+    }
+
+    public function propertiesJsonQuery($string) {
+        $propertiesClient = new Properties(HttpClient::getInstance());
+        if(!$this->validateProperties($string)) {
+            return "";
+        }
+        $response = $propertiesClient->find($string);
+        return $response;
     }
 
     public function getPost() {

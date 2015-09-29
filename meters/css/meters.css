@@ -1,53 +1,37 @@
-[class^="widget"]{
-    /*	border: 1px dotted black;*/
+.widget {
     display: inline-block;
     vertical-align: top;
     position: relative;
     margin: 5px;
 }
-[class^="widget-table"], [class^="widget-console"], [class^="widget-property"]{
-    height: auto !important;
+
+#title {
+    text-align: left;
+    vertical-align: top;
+    font-size: 20px;
+    float: left;
+}
+
+#timezone {
+    font-size: 10px;
+}
+
+#menu {
+    float: left;
+}
+
+.menuBlocks {
+    padding-top: 10px;
+    padding-right: 20px
 }
 
 body {
     overflow: auto !important;
-}
-
-#header {
-    background-color:darkgrey;
-    color:white;
-    text-align:center;
-    padding:5px;
-}
-
-#nav {
-    line-height:40px;
-    background-color:#eeeeee;
-    height: 600px;
-    width:150px;
-    float:left;
-    padding:5px;
-}
-#section {
-    width:1300px;
-    float:left;
-    padding:10px;
-}
-#footer {
-    background-color:black;
-    color:white;
-    clear:both;
-    text-align:center;
-    padding:5px;
-}
-.axi-tooltip {
-    text-align: left;
-}
-body, td, table {
+    white-space: nowrap;
     font-family: Arial;
 }
 
-.axi-tooltip-container{
+.axi-tooltip-container {
     z-index: -1
 }
 

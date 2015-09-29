@@ -21,10 +21,6 @@ class Alerts  extends AtsdClient {
     const URI = '/alerts';
     protected $queryUri;
 
-    function __construct($client) {
-        parent::__construct($client);
-    }
-
     function find($jsonRequest) {
         $this->queryUri = Alerts::URI;
         $this->postParams = $jsonRequest;

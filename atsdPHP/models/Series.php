@@ -16,19 +16,12 @@
 namespace axibase\atsdPHP;
 require_once(dirname(__FILE__) . '/../AtsdClient.php');
 
-class Series extends AtsdClient{
+class Series extends AtsdClient {
     const URL = "/series";
-    private $queries;
-    private $series;
-    private $currentQuery;
     protected $queryUri;
-
-    function __construct($client) {
-        parent::__construct($client);
-        $this->postParams = array();
-        $this->queries = array();
-        $this->currentQuery = array();
-    }
+    private $queries = array();
+    private $currentQuery = array();
+    private $series;
 
     public function addAggregateQuery($entity, $metric, $startTime, $endTime, $aggregator, $tags = array()) {
         $optional["aggregate"] = $aggregator->asArray();

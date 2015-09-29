@@ -21,11 +21,8 @@ class Entities  extends AtsdClient {
     const ENTITIES_URI = '/entities?';
     const ENTITY_URI = '/entities/[[entity]]';
     const METRICS_FOR_ENTITY = '/entities/[[entity]]/metrics?';
+    const PROPERTIES_FOR_ENTITY = '/entities/[[entity]]/property-types?';
     protected $queryUri;
-
-    function __construct($client) {
-        parent::__construct($client);
-    }
 
     function findAll($getParameters = array()) {
         $this->queryUri = Entities::ENTITIES_URI;
@@ -41,6 +38,12 @@ class Entities  extends AtsdClient {
 
     function findMetrics($entity, $getParameters = array()) {
         $this->queryUri = str_replace('[[entity]]', urlencode($entity), Entities::METRICS_FOR_ENTITY);
+        $this->applyGetParameters($getParameters);
+        return $this->query($this->queryUri . $this->getParams);
+    }
+
+    function findPropertyTypes($entity, $getParameters = array()) {
+        $this->queryUri = str_replace('[[entity]]', urlencode($entity), Entities::PROPERTIES_FOR_ENTITY);
         $this->applyGetParameters($getParameters);
         return $this->query($this->queryUri . $this->getParams);
     }

@@ -30,6 +30,19 @@ class ApiProxy extends BasicApiProxy {
         }
         return true;
     }
+
+    function validateProperties($string) {
+        $data = json_decode($string, true); //check that cached entities contains each of the entities in the request.
+        if(!array_key_exists('queries', $data)) {
+            return false;
+        }
+        foreach($data['queries'] as $query) {
+            if(!in_array($query['entity'], $_SESSION['entities'])) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
 
 session_start();
@@ -43,8 +56,26 @@ $query = $proxy->getPost();
 if(strlen($query) == 0) {
     return "query is not set.";
 }
-$response = $proxy->seriesJsonQuery($query);
+
+$type = array_key_exists('type', $_GET)?$_GET['type']:'default';
+switch ($type) {
+    case 'series':
+        $response = $proxy->seriesJsonQuery($query);
+        break;
+
+    case 'properties':
+        $response = $proxy->propertiesJsonQuery($query);
+        break;
+
+    default:
+        $response = "";
+        break;
+}
+
 header('Content-Type: application/json; charset=UTF-8');
 echo json_encode($response);
+
+
+
 exit();
 

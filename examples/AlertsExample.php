@@ -19,18 +19,16 @@ require_once '../atsdPHP/models/Alerts.php';
 require_once '../atsdPHP/HttpClient.php';
 require_once '../atsdPHP/Utils.php';
 
-$client = new HttpClient();
-$client->connect();
+$entity = "nurswgvml007";
 
-$entity = "nurswgvml006";
-
-$queryClient = new Alerts($client);
+$queryClient = new Alerts(HttpClient::getInstance());
 
 $jsonObj = json_decode('{"queries": [{"entities": ["' . $entity . '"]}]}');
 $response = $queryClient->find($jsonObj);
+
+HttpClient::getInstance()->close();
 
 $viewConfig = new ViewConfiguration("Alerts for entity: " . $entity, "alerts", array('severity' => 'severity', 'openTime' => 'unixtimestamp', 'lastEventTime' => 'unixtimestamp'));
 $tbl = Utils::arrayAsHtmlTable($response, $viewConfig);
 
 Utils::render(array($tbl));
-$client->close();

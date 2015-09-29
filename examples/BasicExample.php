@@ -19,16 +19,14 @@ require_once '../atsdPHP/models/Metrics.php';
 require_once '../atsdPHP/HttpClient.php';
 require_once '../atsdPHP/Utils.php';
 
-$client = new HttpClient();
-$client->connect();
-
 $expression = 'name like \'nmon*\'';
 $limit = 10;
 
-$queryClient = new Metrics($client);
+$queryClient = new Metrics(HttpClient::getInstance());
 
 $params = array('limit' => $limit, 'expression' => $expression);
 $metricsResponse = $queryClient->findAll($params);
 
+HttpClient::getInstance()->close();
+
 var_dump($metricsResponse);
-$client->close();
