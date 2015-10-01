@@ -48,8 +48,8 @@ class Series extends AtsdClient {
             }
         }
         $this->currentQuery["requestId"] = count($this->queries);
-        $this->currentQuery["entity"] = urlencode($entity);
-        $this->currentQuery["metric"] = urlencode($metric);
+        $this->currentQuery["entity"] = rawurlencode($entity);
+        $this->currentQuery["metric"] = rawurlencode($metric);
         foreach($optional as $key => $option) {
             $this->currentQuery[$key] = $option;
         }

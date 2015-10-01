@@ -31,19 +31,19 @@ class Entities  extends AtsdClient {
     }
 
     function find($entity) {
-        $this->queryUri = str_replace('[[entity]]', urlencode($entity), Entities::ENTITY_URI);
+        $this->queryUri = str_replace('[[entity]]', rawurlencode($entity), Entities::ENTITY_URI);
         return $this->query($this->queryUri);
     } 
 
 
     function findMetrics($entity, $getParameters = array()) {
-        $this->queryUri = str_replace('[[entity]]', urlencode($entity), Entities::METRICS_FOR_ENTITY);
+        $this->queryUri = str_replace('[[entity]]', rawurlencode($entity), Entities::METRICS_FOR_ENTITY);
         $this->applyGetParameters($getParameters);
         return $this->query($this->queryUri . $this->getParams);
     }
 
     function findPropertyTypes($entity, $getParameters = array()) {
-        $this->queryUri = str_replace('[[entity]]', urlencode($entity), Entities::PROPERTIES_FOR_ENTITY);
+        $this->queryUri = str_replace('[[entity]]', rawurlencode($entity), Entities::PROPERTIES_FOR_ENTITY);
         $this->applyGetParameters($getParameters);
         return $this->query($this->queryUri . $this->getParams);
     }

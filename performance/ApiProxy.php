@@ -50,7 +50,6 @@ if(!array_key_exists('user', $_SESSION)) {
     exit("Authentication required.");
 }
 session_commit();
-
 $proxy = new ApiProxy();
 $query = $proxy->getPost();
 if(strlen($query) == 0) {

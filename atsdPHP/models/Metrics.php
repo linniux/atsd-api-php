@@ -24,7 +24,7 @@ class Metrics  extends AtsdClient {
     protected $queryUri;
 
     function findEntityAndTags($metric, $entity = null) {
-        $this->queryUri = str_replace('[[metric]]', urlencode($metric), Metrics::ENTITY_AND_TAGS_FOR_METRIC_URI);
+        $this->queryUri = str_replace('[[metric]]', rawurlencode($metric), Metrics::ENTITY_AND_TAGS_FOR_METRIC_URI);
         if($entity) {
             $this->applyGetParameters(array("entity" => $entity));
         }
@@ -39,7 +39,7 @@ class Metrics  extends AtsdClient {
     }
 
     function find($metric, $getParameters = array()) {
-        $this->queryUri = str_replace('[[metric]]', urlencode($metric), Metrics::METRIC_URI);
+        $this->queryUri = str_replace('[[metric]]', rawurlencode($metric), Metrics::METRIC_URI);
         $this->applyGetParameters($getParameters);
         return $this->query($this->queryUri . $this->getParams);
 

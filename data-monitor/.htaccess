@@ -1,0 +1,8 @@
+AuthType Digest
+AuthName data-monitor
+AuthUserFile "atsd-api-php/data-monitor/.htpasswd"
+Require valid-user
+<Files ~ "^.*\.ini$">
+    Order allow,deny
+    Deny from all
+</Files>

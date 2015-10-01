@@ -4,7 +4,7 @@
 <?php else :?>
     <div class="menuBlocks" id="menu">
         <form method="GET" id="form">
-            <select name='entity'  style="height: 600px; width: 200px;" onchange="this.form.submit()" class="selectpicker" multiple="multiple">
+            <select name='entity'  style="height: 600px; width: 200px;" onchange="this.form.submit()" class="form-control" multiple="multiple">
                 <?php foreach($_SESSION['entities'] as $entity): ?>
                     <option
                         value="<?=htmlspecialchars($entity)?>"

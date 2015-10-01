@@ -15,7 +15,8 @@
 */
 
 namespace axibase\atsdPHP;
-class HttpClient {
+class HttpClient
+{
     const CONFIG = 'atsd.ini';
     private static $instance = null;
     private static $curlOpts = array(
@@ -68,15 +69,16 @@ class HttpClient {
         }
 
         $response = curl_exec($this->curlHandler);
+
         $responseContentType = curl_getinfo($this->curlHandler, CURLINFO_CONTENT_TYPE);
         if (strpos($responseContentType, "json") !== false) {
             $response = json_decode($response, true);
+
             if ($response === null) {
                 throw new \ErrorException("ERROR: " . var_export(curl_getinfo($this->curlHandler), true));
             }
             if (array_key_exists("error", $response) && isset($response["error"])) {
                 throw new \ErrorException('ERROR: ' . $response['error']);
-
             }
         }
         return $response;
