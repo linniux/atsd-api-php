@@ -68,7 +68,7 @@ function prepareTimestamp($timestamp) {
             echo "<td class='status'></td>";
             echo "<td class='time' data-time=" . (empty($entity['lastInsertTime']) ? "" : $entity['lastInsertTime']) . ">" . (empty($entity['lastInsertTime']) ? "" : prepareTimestamp($entity['lastInsertTime'])) . "</td>";
 
-            echo "<td><a href='metrics.php?entity=" . rawurlencode($entity['name']) . "' target=_blank>" . $entity['name'] . "</a></td>";
+            echo "<td>" . $entity['name'] . "</td>";
 
 
             foreach ($orderedTags as $tagName) {
