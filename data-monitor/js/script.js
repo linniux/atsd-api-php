@@ -1,5 +1,8 @@
 $(function() {
+    cDate = new Date($('#time-timestamp').data('timestamp') * 1000);
+
     $('.time-select').on('change', function() {
+
         var lagSelect = $.trim($('.time-select[name="lag"] option:selected').text());
         var aheadSelect = $.trim($('.time-select[name="ahead"] option:selected').text());
 
@@ -8,19 +11,13 @@ $(function() {
         var lagSec = Number(lagSelect)*60*1000;
         var aheadSec = Number(aheadSelect)*60*1000;
 
-        cDate = new Date();
-
-        $('#entities .entity').each(function() {
-            $status = $(this).find('.status').first();
+        $('#data .data-node').each(function() {
+            $status = $(this).find('.status').find('div').first();
             insertTime = $(this).find('.time').first().data('time');
-            if(insertTime == "") {
-                $status.addClass('no-insert-time');
-                return;
-            }
+
             date = new Date(Number(insertTime));
 
             diff = cDate - date;
-
             if(diff > 0) {
                 if(diff > lagSec) {
                     $status.addClass('lagging');
@@ -45,10 +42,10 @@ $(function() {
 
     $('.filter-select').on('change', function() {
         filter = $(this).val();
-        window.history.pushState(null, null, window.location.search.replace(/&filter=[^&]*/, '&filter=' + filter));
+        window.history.pushState(null, null, window.location.search.replace(/&status=[^&]*/, '&status=' + filter));
 
-        $('#entities .entity').each(function() {
-            $status = $(this).find('.status').first();
+        $('#data .data-node').each(function() {
+            $status = $(this).find('.status').find('div').first();
             if(filter == 'all') {
                 $(this).show();
             } else {
@@ -62,6 +59,12 @@ $(function() {
         });
     });
 
+
+
     $('.time-select').first().trigger('change');
-    $('.filter-select').first().trigger('change');
 });
+function redirect(entity) {
+    var lagSelect = $.trim($('.time-select[name="lag"] option:selected').text());
+    var aheadSelect = $.trim($('.time-select[name="ahead"] option:selected').text());
+    window.open("metrics.php?entity=" + entity + "&lag=" + lagSelect + "&ahead=" + aheadSelect);
+}

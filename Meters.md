@@ -21,8 +21,8 @@ $ sudo apt-get install apache2-utils
 ```bash
 $ touch atsd-api-php/meters/.htpasswd
 $ htdigest atsd-api-php/meters/.htpasswd meters admin
-$ htdigest atsd-api-php/meters/.htpasswd meters user-001
-$ htdigest atsd-api-php/meters/.htpasswd meters user-002
+$ htdigest atsd-api-php/meters/.htpasswd meters user1
+$ htdigest atsd-api-php/meters/.htpasswd meters user2
 $ htdigest atsd-api-php/meters/.htpasswd meters guest
 ```
 

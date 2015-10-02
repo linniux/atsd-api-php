@@ -6,9 +6,27 @@ $client = new Entities(HttpClient::getInstance());
 if (empty($_REQUEST['entity'])) {
     exit("Entity is not specified");
 }
-$metrics = $client->findMetrics($_REQUEST['entity']);
+$metrics = $client->findMetrics($_REQUEST['entity'], array("useEntityInsertTime" => true));
 if($metrics === false) {
     $metrics = array();
+}
+
+if (!isset($_REQUEST['lag']))
+    $_REQUEST['lag'] = "99999999";
+if (!isset($_REQUEST['ahead']))
+    $_REQUEST['ahead'] = "99999999";
+
+
+if (!isset($_REQUEST['status'])) {
+    $_REQUEST['status'] = 'all';
+}
+
+$entities = array();
+if (!empty($_REQUEST['group'])) {
+    $entities = $client->findEntities($_REQUEST['group'], array("tags" => "*"));
+    if($entities === false) {
+        $entities = array();
+    }
 }
 
 function prepareTimestamp($timestamp) {
@@ -20,23 +38,28 @@ function prepareTimestamp($timestamp) {
 <!DOCTYPE html>
 <html>
 <head>
-    <?php require('head.html'); ?>
+    <?php require('includes/head.html'); ?>
 </head>
 <body>
-<h3 class="metricTitle">Entity: <?= $_REQUEST['entity'] ?></h3>
-<div id="timezone">
-    All times specified in <b><?=date_default_timezone_get()?></b>
+<div style="display: none">
+    <?php require('includes/menu.php'); ?>
 </div>
-<table id="metrics" border="1px" class="table-striped table-bordered table-condensed sortable midtable">
+<h4 class="metricTitle">Entity: <?= $_REQUEST['entity'] ?></h4>
+<?php require('includes/time.php');?>
+<table id="data" border="1px" class="table-striped table-bordered table-condensed sortable midtable data-table">
     <tr class="table-head">
+        <th>Status</th>
         <th>Last Insert</th>
+        <th>Time Lag (min:sec)</th>
         <th>Metric Name</th>
 
     </tr>
     <?php if (!empty($metrics)) {
         foreach ($metrics as $metric) {
-            echo "<tr class='metric'>";
-            echo "<td class='time'>" . (empty($metric['lastInsertTime']) ? "" : prepareTimestamp($metric['lastInsertTime'])) . "</td>";
+            echo "<tr class='data-node'>";
+            echo "<td class='status'><div class='status-div'></div></td>";
+            echo "<td class='time' data-time=" . (empty($metric['lastInsertTime']) ? "" : $metric['lastInsertTime']) . ">" . (empty($metric['lastInsertTime']) ? "" : prepareTimestamp($metric['lastInsertTime'])) . "</td>";
+            echo "<td class='diff' sorttable_customkey='" . (empty($metric['lastInsertTime']) ? "0" : $metric['lastInsertTime']) . "'>" . (empty($metric['lastInsertTime']) ? "" : getDiff($date, $metric['lastInsertTime'])) . "</td>";
             echo "<td>" . $metric['name'] . "</td>";
             echo "</tr>";
         }

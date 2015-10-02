@@ -2,19 +2,20 @@
 namespace axibase\atsdPHP;
 require_once '../atsdPHP/HttpClient.php';
 require_once '../atsdPHP/models/EntityGroups.php';
+
+
 $client = new EntityGroups(HttpClient::getInstance());
 $groups = $client->findAll();
-if (!isset($_REQUEST['lag'])) {
+if (!isset($_REQUEST['lag']))
     $_REQUEST['lag'] = "15";
-}
-if (!isset($_REQUEST['ahead'])) {
+if (!isset($_REQUEST['ahead']))
     $_REQUEST['ahead'] = "1";
-}
 
 
-if (!isset($_REQUEST['filter'])) {
-    $_REQUEST['filter'] = 'all';
+if (!isset($_REQUEST['status'])) {
+    $_REQUEST['status'] = 'all';
 }
+
 $entities = array();
 if (!empty($_REQUEST['group'])) {
     $entities = $client->findEntities($_REQUEST['group'], array("tags" => "*"));
@@ -22,28 +23,24 @@ if (!empty($_REQUEST['group'])) {
         $entities = array();
     }
 }
-function prepareTimestamp($timestamp) {
-    $date = new \DateTime();
-    $date->setTimestamp($timestamp / 1000);
-    return $date->format('Y-m-d H:i:s');
-}
 
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <?php require('head.html'); ?>
+    <?php require('includes/head.html'); ?>
 </head>
 <body>
 
-<?php require('menu.php') ?>
+<?php require('includes/menu.php') ?>
+<?php require('includes/time.php');?>
 
-
-<table id="entities" border="1px" class="table-striped table-bordered table-condensed sortable midtable">
+<table id="data" border="1px" class="table-striped table-bordered table-condensed sortable midtable data-table">
     <tr class="table-head">
         <th>Status</th>
         <th>Last Insert</th>
-        <th>Name</th>
+        <th>Time Lag (min:sec)</th>
+        <th>Entity</th>
         <?php
         $orderedTags = array();
         foreach ($entities as $entity) {
@@ -64,11 +61,13 @@ function prepareTimestamp($timestamp) {
             if (!$entity['enabled']) {
                 continue;
             }
-            echo "<tr class='entity'>";
-            echo "<td class='status'></td>";
+            echo "<tr class='data-node'>";
+            echo "<td class='status'><div class='status-div'></div></td>";
             echo "<td class='time' data-time=" . (empty($entity['lastInsertTime']) ? "" : $entity['lastInsertTime']) . ">" . (empty($entity['lastInsertTime']) ? "" : prepareTimestamp($entity['lastInsertTime'])) . "</td>";
 
-            echo "<td>" . $entity['name'] . "</td>";
+            echo "<td class='diff' sorttable_customkey='" . (empty($entity['lastInsertTime']) ? "0" : $entity['lastInsertTime']) . "'>" . (empty($entity['lastInsertTime']) ? "" : getDiff($date, $entity['lastInsertTime'])) . "</td>";
+
+            echo '<td><a href=javascript:redirect("' . rawurlencode($entity['name']) . '")>' . $entity['name']. '</a></td>';
 
 
             foreach ($orderedTags as $tagName) {

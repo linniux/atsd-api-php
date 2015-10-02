@@ -1,34 +1,31 @@
+body {
+    margin: 10px;
+}
+
 table {
-    border-collapse: collapse;
-    vertical-align: middle;
     white-space: nowrap;
-    margin: 10px;
-
 }
 
-.metricTitle {
-    margin: 10px;
-}
-
-table td,th {
-    padding: 4px;
-
+.menu-table th,td {
+    border-collapse: separate;
+    padding:0 50px 0 0;
 }
 
 #timezone{
     position:absolute;
+    margin: 10px;
     top:0;
     right:0;
 }
 
-#entities, #metrics {
+.data-table {
     font-size: 12px;
+    margin-top: 15px;
 }
 
 .sortable tr th {
     cursor: pointer;
 }
-
 
 .ahead {
     background-color: magenta;
@@ -38,22 +35,13 @@ table td,th {
     background-color: red;
 }
 
-
-
-.no-insert-time {
-    background-color: #FFFFFF;
+.diff {
+    text-align: right;
 }
 
-
-
-/*.table-head {*/
-    /*font-size: 18;*/
-/*}*/
-
-/*#entities {*/
-    /*background-color: #F5F5F5;*/
-/*}*/
-
-/*#entities tr th {*/
-    /*background-color: #BBBBBB;*/
-/*}*/
+.status-div {
+    width: 10px;
+    height: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
