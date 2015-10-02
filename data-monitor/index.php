@@ -29,11 +29,13 @@ if (!empty($_REQUEST['group'])) {
 <html>
 <head>
     <?php require('includes/head.html'); ?>
+    <script type="text/javascript" src="js/index.js"></script>
 </head>
 <body>
 
 <?php require('includes/menu.php') ?>
 <?php require('includes/time.php');?>
+
 
 <table id="data" border="1px" class="table-striped table-bordered table-condensed sortable midtable data-table">
     <tr class="table-head">

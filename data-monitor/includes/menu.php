@@ -21,9 +21,11 @@
         <td>
             <select name="lag" class="time-select form-control">
                 <?php
-                for ($i = 0; $i <= 15; $i++) {
+                $timeList = array(0,1,2,3,4,5,6,7,8,9,10,15,20,40,60,180,360,720,1440);
+                foreach($timeList as $i) {
                     echo "<option value='" . $i . ((isset($_REQUEST['lag']) && $_REQUEST['lag'] == $i) ? "' selected" : "'") . ">" . $i . "</option>";
                 }
+
                 ?>
             </select>
         </td>

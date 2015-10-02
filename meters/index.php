@@ -1,16 +1,16 @@
-<?php require_once (dirname(__FILE__)) . '/Request.php';
+<?php require_once ('includes/Request.php');
 $request = new Request();
 $title = "Meter Report";?>
 <!DOCTYPE html>
 <html>
 <head>
-    <?php include_once("./head.php") ?>
+    <?php include_once("includes/head.php") ?>
     <script type="text/javascript" src="js/entity-configs.js"></script>
     <script type="text/javascript" src="js/entity.js"></script>
 </head>
 <body onLoad="generateWidgets('<?=$request->getSelectedEntity()?>')">
 
-<?php include_once("./menu.php") ?>
+<?php include_once("includes/menu.php") ?>
 
 <div id="data">
     <table>

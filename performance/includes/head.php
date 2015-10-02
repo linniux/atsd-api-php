@@ -14,14 +14,23 @@
 * permissions and limitations under the License.
 */
 -->
-<title>data-monitor</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
 <script src="//code.jquery.com/jquery-latest.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="//axibase.com/atsd/portalFiddle/portal/JavaScript/d3.min.js"></script>
+<script type="text/javascript" src="//axibase.com/atsd/portalFiddle/portal/JavaScript/portal_init.js"></script>
+<script type="text/javascript" src="//lab.axibase.com/chartlab/portal/JavaScript/charts.min.js"></script>
+<script type="text/javascript" src="//lab.axibase.com/chartlab/portal/JavaScript/initialize.js"></script>
+<script type="text/javascript" src="js/configs.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
-<script type="text/javascript" src="js/sorttable.js"></script>
+
 
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="//lab.axibase.com/chartlab/portal/CSS/charts.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/performance.css"/>
+
 
 
 

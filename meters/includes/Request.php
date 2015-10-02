@@ -1,6 +1,6 @@
 <?php
-require_once(dirname(__FILE__)) . '/../atsdPHP/HttpClient.php';
-require_once(dirname(__FILE__)) . '/../atsdPHP/models/EntityGroups.php';
+require_once(dirname(__FILE__)) . '/../../atsdPHP/HttpClient.php';
+require_once(dirname(__FILE__)) . '/../../atsdPHP/models/EntityGroups.php';
 use axibase\atsdPHP\HttpClient;
 use axibase\atsdPHP\EntityGroups;
 

@@ -105,6 +105,7 @@ $(function () {
 
 
     function setUpEvents() {
+
         $('#tabs a').on('click', function (e) {
             e.preventDefault();
             $(this).tab('show');
@@ -113,7 +114,7 @@ $(function () {
             widgetUpdateTrigger();
         });
 
-        $(this).on('click', '.panel-heading', function () {
+        $(document).on('click', '.panel-heading', function () {
             panelCollapse = $(this).parent().find('.panel-collapse');
             if (panelCollapse.is(':visible')) {
                 panelCollapse.hide();
@@ -127,6 +128,7 @@ $(function () {
             $('#form').append('<input type="hidden" name="refresh" value="true" />');
             $('#form').submit();
         });
+
         $('#tabs li').filter('.active').children().first().trigger('click');
     }
 

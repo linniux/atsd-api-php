@@ -1,7 +1,7 @@
 <?php
-require_once(dirname(__FILE__)) . '/../atsdPHP/HttpClient.php';
-require_once(dirname(__FILE__)) . '/../atsdPHP/models/EntityGroups.php';
-require_once(dirname(__FILE__)) . '/../atsdPHP/models/Entities.php';
+require_once(dirname(__FILE__)) . '/../../atsdPHP/HttpClient.php';
+require_once(dirname(__FILE__)) . '/../../atsdPHP/models/EntityGroups.php';
+require_once(dirname(__FILE__)) . '/../../atsdPHP/models/Entities.php';
 use axibase\atsdPHP\HttpClient;
 use axibase\atsdPHP\EntityGroups;
 use axibase\atsdPHP\Entities;

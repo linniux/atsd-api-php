@@ -21,14 +21,6 @@ if (!isset($_REQUEST['status'])) {
     $_REQUEST['status'] = 'all';
 }
 
-$entities = array();
-if (!empty($_REQUEST['group'])) {
-    $entities = $client->findEntities($_REQUEST['group'], array("tags" => "*"));
-    if($entities === false) {
-        $entities = array();
-    }
-}
-
 function prepareTimestamp($timestamp) {
     $date = new \DateTime();
     $date->setTimestamp($timestamp/1000);
@@ -39,11 +31,9 @@ function prepareTimestamp($timestamp) {
 <html>
 <head>
     <?php require('includes/head.html'); ?>
+    <script type="text/javascript" src="js/metrics.js"></script>
 </head>
 <body>
-<div style="display: none">
-    <?php require('includes/menu.php'); ?>
-</div>
 <h4 class="metricTitle">Entity: <?= $_REQUEST['entity'] ?></h4>
 <?php require('includes/time.php');?>
 <table id="data" border="1px" class="table-striped table-bordered table-condensed sortable midtable data-table">
@@ -66,6 +56,8 @@ function prepareTimestamp($timestamp) {
     }
     ?>
 </table>
+<input type="hidden" id="lag" value="<?=$_REQUEST['lag']?>"/>
+<input type="hidden" id="ahead" value="<?=$_REQUEST['ahead']?>"/>
 
 </body>
 </html>

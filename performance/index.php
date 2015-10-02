@@ -1,4 +1,4 @@
-<?php require_once (dirname(__FILE__)) . '/Request.php';
+<?php require_once ('includes/Request.php');
 $request = new Request();
 $title = "Performance Viewer";
 $currentTab = $request->currentTab;?>
@@ -6,7 +6,7 @@ $currentTab = $request->currentTab;?>
 <html>
 <head>
     <title>Performance Application</title>
-    <?php include_once("./head.php") ?>
+    <?php include_once("includes/head.php") ?>
 
 </head>
 <body onLoad="onBodyLoad()">
@@ -25,7 +25,7 @@ $currentTab = $request->currentTab;?>
 <table class="contentTable">
     <tr>
         <td>
-            <?php include_once("./menu.php") ?>
+            <?php include_once("includes/menu.php") ?>
         </td>
         <td>
             <table>
