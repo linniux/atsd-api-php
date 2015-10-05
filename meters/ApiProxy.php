@@ -44,7 +44,10 @@ if(strlen($query) == 0) {
     return "query is not set.";
 }
 $response = $proxy->seriesJsonQuery($query);
-header('Content-Type: application/json; charset=UTF-8');
+
+header('Content-Type: application/json; charset=UTF-8;');
+ob_start('ob_gzhandler');
 echo json_encode($response);
+ob_end_flush();
 exit();
 

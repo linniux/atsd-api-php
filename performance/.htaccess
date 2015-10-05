@@ -1,4 +1,4 @@
 AuthType Digest
 AuthName performance
-AuthUserFile "axibase_htpasswd"
+AuthUserFile "htpasswd_examples/axibase_htpasswd"
 Require valid-user

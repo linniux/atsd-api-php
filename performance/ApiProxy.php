@@ -71,10 +71,10 @@ switch ($type) {
         break;
 }
 
-header('Content-Type: application/json; charset=UTF-8');
+header('Content-Type: application/json; charset=UTF-8;');
+ob_start('ob_gzhandler');
 echo json_encode($response);
-
-
+ob_end_flush();
 
 exit();
 
