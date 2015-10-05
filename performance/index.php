@@ -54,7 +54,6 @@ $currentTab = $request->currentTab;?>
                             <div class="title">
                                 <b><?=$_SESSION['user']?></b> denied access to entity <b><?=$request->selectedEntity?></b>
                             </div>
-                            <h3></h3>
                         <?php else :?>
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane in <?= $currentTab=="perf"?'active':''?>" id="performanceTab">
