@@ -12,7 +12,7 @@ $currentTab = $request->currentTab;?>
 <body onLoad="onBodyLoad()">
 
 <div class="head">
-    <div align="left" id="title">
+    <div align="left" class="title">
         <b><?= $title ?></b>
     </div>
     <div align="right" id="user">
@@ -50,6 +50,11 @@ $currentTab = $request->currentTab;?>
                     <td>
                         <?php if(is_null($request->selectedEntity)):?>
                             Entity is not selected. <?exit()?>
+                        <?php elseif(!in_array($request->selectedEntity, $_SESSION['entities'])) :?>
+                            <div class="title">
+                                <b><?=$_SESSION['user']?></b> denied access to entity <b><?=$request->selectedEntity?></b>
+                            </div>
+                            <h3></h3>
                         <?php else :?>
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane in <?= $currentTab=="perf"?'active':''?>" id="performanceTab">
