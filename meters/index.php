@@ -5,10 +5,9 @@ $title = "Meter Report";?>
 <html>
 <head>
     <?php include_once("includes/head.php") ?>
-    <script type="text/javascript" src="js/entity-configs.js"></script>
     <script type="text/javascript" src="js/entity.js"></script>
 </head>
-<body onLoad="generateWidgets('<?=$request->getSelectedEntity()?>')">
+<body onLoad="onBodyLoad();generateWidgets('<?=$request->getSelectedEntity()?>')">
 
 <?php include_once("includes/menu.php") ?>
 
@@ -17,15 +16,15 @@ $title = "Meter Report";?>
         <tbody>
         <tr>
             <td>
-                <div id="dailyUsage" class="widget"></div>
+                <div id="daily-usage" class="widget"></div>
             </td>
             <td>
-                <div id="currentUsage" class="widget"></div>
+                <div id="current-usage" class="widget"></div>
             </td>
         </tr>
         <tr>
             <td colspan="2">
-                <div id="monthlyUsage" class="widget"></div>
+                <div id="monthly-usage" class="widget"></div>
             </td>
         </tr>
         <tr>

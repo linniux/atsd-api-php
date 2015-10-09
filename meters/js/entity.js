@@ -8,18 +8,38 @@ global.generateWidgets = function(entity){
     if(entity == "") {
         return;
     }
-    for(var j = 0; j < currentUsageConfig.series.length; j++) {
-        currentUsageConfig.series[j].entity = entity;
-    }
-    for(var j = 0; j < dailyUsageConfig.series.length; j++) {
-        dailyUsageConfig.series[j].entity = entity;
-    }
-    for(var j = 0; j < monthlyUsageConfig.series.length; j++) {
-        monthlyUsageConfig.series[j].entity = entity;
-    }
-    updateWidget(dailyUsageConfig, 'dailyUsage');
-    updateWidget(currentUsageConfig, 'currentUsage');
-    updateWidget(monthlyUsageConfig, 'monthlyUsage');
+    var cEntity = entity;
+    var configName = "entity.config";
+    loadWidgets('conf/' + configName + '?cache=' + Date.now(), function (widgetConfigs) {
+        var daily = widgetConfigs[0];
+        var current = widgetConfigs[1];
+        var monthly = widgetConfigs[2];
+
+
+        for(var j = 0; j < daily.series.length; j++) {
+            daily.series[j].entity = cEntity;
+        }
+        for(var j = 0; j < current.series.length; j++) {
+            current.series[j].entity = cEntity;
+        }
+        for(var j = 0; j < monthly.series.length; j++) {
+            monthly.series[j].entity = cEntity;
+        }
+
+        updateWidget(daily, 'daily-usage');
+        updateWidget(current, 'current-usage');
+        updateWidget(monthly, 'monthly-usage');
+    });
+
+
+
+
+
+
+
+
+
+
 };
 
 })(window);

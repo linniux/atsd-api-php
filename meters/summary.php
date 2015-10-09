@@ -5,10 +5,9 @@ $title = "Summary Report";?>
 <html>
 <head>
     <?php include_once("includes/head.php") ?>
-    <script type="text/javascript" src="js/summary-configs.js"></script>
     <script type="text/javascript" src="js/summary.js"></script>
 </head>
-<body onLoad="generateSummary()">
+<body onLoad="onBodyLoad();generateSummary()">
 
 <?php include_once("includes/menu.php") ?>
 
@@ -16,7 +15,7 @@ $title = "Summary Report";?>
     <table>
         <tbody>
             <tr>
-                <td><div id="chart-0" class="widget"></div></td>
+                <td><div id="summary-chart" class="widget"></div></td>
             </tr>
         </tbody>
     </table>
