@@ -35,6 +35,7 @@ function export() {
         $endDate = $_REQUEST['endDate'];
         $interval = $_REQUEST['interval'];
         $csv = getCsv($entity, $metric, $endDate, $interval);
+        header("Content-type: text/csv; charset=UTF-8");
         header("Content-Disposition: attachment; filename=series.csv");
         echo $csv;
     } else {
