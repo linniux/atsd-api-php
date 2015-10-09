@@ -10,8 +10,8 @@ global.generateSummary = function() {
             entity: entity.getAttribute('value'),
             label: entity.getAttribute('value'),
             period: '1 day',
-            serveraggregate: 'true',
-            statistics: 'sum',
+            serverAggregate: true,
+            statistic: 'sum',
             color: colors[i]
 
         };

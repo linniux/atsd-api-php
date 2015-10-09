@@ -71,6 +71,6 @@ monthlyUsageConfig = {
         label: 'Today',
         color: 'green',
         period: '1 day',
-        statistics: 'sum'
+        statistic: 'sum'
     }]
 };
