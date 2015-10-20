@@ -18,17 +18,17 @@
 
 <script src="//code.jquery.com/jquery-latest.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="//axibase.com/atsd/portalFiddle/portal/JavaScript/d3.min.js"></script>
-<script type="text/javascript" src="//axibase.com/atsd/portalFiddle/portal/JavaScript/portal_init.js"></script>
-<script type="text/javascript" src="//lab.axibase.com/chartlab/portal/JavaScript/charts.min.js"></script>
-<script type="text/javascript" src="//lab.axibase.com/chartlab/portal/JavaScript/initialize.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js"></script>
+<script type="text/javascript" src="//apps.axibase.com/chartlab/portal/JavaScript/portal_init.js"></script>
+<script type="text/javascript" src="//apps-chartlab.axibase.com/chartlab/portal/JavaScript/charts.min.js"></script>
+<script type="text/javascript" src="//apps-chartlab.axibase.com/chartlab/portal/JavaScript/initialize.js"></script>
 <script type="text/javascript" src="js/configs.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
 
 
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="//lab.axibase.com/chartlab/portal/CSS/charts.min.css"/>
+<link rel="stylesheet" type="text/css" href="//apps-chartlab.axibase.com/chartlab/portal/CSS/charts.min.css"/>
 <link rel="stylesheet" type="text/css" href="css/performance.css"/>
 
 

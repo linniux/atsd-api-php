@@ -15,11 +15,11 @@
 */
 -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" type="text/css" href="//lab.axibase.com/chartlab/portal/CSS/charts.min.css"/>
+<link rel="stylesheet" type="text/css" href="//apps-chartlab.axibase.com/chartlab/portal/CSS/charts.min.css"/>
 <link href="css/meters.css" type="text/css" rel="stylesheet"/>
 
-<script type="text/javascript" src="//axibase.com/atsd/portalFiddle/portal/JavaScript/d3.min.js"></script>
-<script type="text/javascript" src="//axibase.com/atsd/portalFiddle/portal/JavaScript/portal_init.js"></script>
-<script type="text/javascript" src="//lab.axibase.com/chartlab/portal/JavaScript/charts.min.js"></script>
-<script type="text/javascript" src="//lab.axibase.com/chartlab/portal/JavaScript/initialize.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js"></script>
+<script type="text/javascript" src="//apps.axibase.com/chartlab/portal/JavaScript/portal_init.js"></script>
+<script type="text/javascript" src="//apps-chartlab.axibase.com/chartlab/portal/JavaScript/charts.min.js"></script>
+<script type="text/javascript" src="//apps-chartlab.axibase.com/chartlab/portal/JavaScript/initialize.js"></script>
 
