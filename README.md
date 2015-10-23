@@ -65,7 +65,7 @@ Once in ```composer.json```, specify the following:
 Specify the correct credentials in atsd.ini (```atsd-api-php/atsdPHP/atsd.ini```):
 
 ```shell
-url = http://nur.axibase.com:8088
+url = [[atsd_server]] 
 username = [[username]]
 password = [[password]]
 ```
