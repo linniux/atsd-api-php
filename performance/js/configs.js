@@ -7,7 +7,7 @@ confWidgetConfig = {
     columntime: null,
     transpose: true,
     responsive: false,
-
+    updateinterval: 0,
     expandtags: true,
     columns: [
         {

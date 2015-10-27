@@ -8,6 +8,7 @@ use axibase\atsdPHP\Entities;
 
 class Request {
     const TIMEZONE = 'UTC';
+    const APP_NAME = 'performance';
     private $selectedEntity;
     private $currentTab;
     private $timezone;
@@ -26,9 +27,15 @@ class Request {
             exit("Authentication required");
         }
         $this->timezone = new DateTimeZone(self::TIMEZONE);
-        if(!array_key_exists('user', $_SESSION) || $_SESSION['user'] != $_SERVER['PHP_AUTH_USER']) {
-            session_unset();
+        if(
+            !array_key_exists('user', $_SESSION) ||
+            $_SESSION['user'] != $_SERVER['PHP_AUTH_USER'] ||
+            self::APP_NAME !=  $_SESSION['app']?:""
+        ) {
+            session_destroy();
+            session_start();
             $_SESSION['user'] = $_SERVER['PHP_AUTH_USER'];
+            $_SESSION['app'] = self::APP_NAME;
         }
         if(!array_key_exists('entities', $_SESSION) || isset($_REQUEST['refresh'])) {
             $this->cacheEntities();

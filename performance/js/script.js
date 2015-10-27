@@ -4,7 +4,8 @@ $(function () {
     var usedMetricsSet = new Array();
     var widgetsStore = [];
     var entity = $('#menu select option:selected').val();
-    var availableMetrics = $('#availableMetrics').data('metrics');
+    var availableMetrics = $('#availableMetrics').data('metrics')|| "";
+
     var iterator = [0];
     var firstBlock = [true];
 
