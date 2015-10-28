@@ -62,7 +62,7 @@ class Request {
             exit("Can not find group for user " . $user);
         }
         $entities = array();
-        $entityGroups = new EntityGroups(HttpClient::getInstance());
+        $entityGroups = new EntityGroups();
 
         try {
             $response = $entityGroups->findEntities($userToGroup[$user]);
@@ -82,7 +82,7 @@ class Request {
 
 
     function getAvailableMetrics($entity) {
-        $entitiesClient = new Entities(HttpClient::getInstance());
+        $entitiesClient = new Entities();
         $metrics = array();
         try {
             $response = $entitiesClient->findMetrics($entity);
@@ -103,7 +103,7 @@ class Request {
 
 
     function getAvailablePropertyTypes($entity) {
-        $entitiesClient = new Entities(HttpClient::getInstance());
+        $entitiesClient = new Entities();
         try {
             $properties = $entitiesClient->findPropertyTypes($entity);
             sort($properties);

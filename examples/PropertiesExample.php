@@ -22,12 +22,10 @@ require_once '../atsdPHP/Utils.php';
 $type = "System";
 $entity = "awsswgvml001";
 
-$queryClient = new Properties(HttpClient::getInstance());
+$queryClient = new Properties();
 
 $json = '{"queries":[{"type":"' . $type . '","entity":"' . $entity . '"}]}';
 $response = $queryClient->find($json);
-
-HttpClient::getInstance()->close();
 
 $viewConfig = new ViewConfiguration("Properties for entity: " . $entity . "; type: " . $type, "properties");
 $propertiesTable = Utils::propertyAsHtmlTable($response, $viewConfig);

@@ -4,7 +4,7 @@ require_once '../atsdPHP/HttpClient.php';
 require_once '../atsdPHP/models/EntityGroups.php';
 
 
-$client = new EntityGroups(HttpClient::getInstance());
+$client = new EntityGroups();
 $groups = $client->findAll();
 if (!isset($_REQUEST['lag']))
     $_REQUEST['lag'] = "15";

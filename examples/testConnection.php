@@ -21,12 +21,10 @@ require_once '../atsdPHP/HttpClient.php';
 $expression = 'name like \'*\'';
 $limit = 1;
 
-$queryClient = new Entities(HttpClient::getInstance());
+$queryClient = new Entities();
 
 $params = array("limit" => $limit, 'expression' => $expression);
 $responseEntities = $queryClient->findAll($params);
-
-HttpClient::getInstance()->close();
 
 if(empty($responseEntities)) {
     exit("Connection failed!");

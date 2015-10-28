@@ -23,7 +23,7 @@ $expression = 'name like \'nurswgvmw*\'';
 $tags = 'app, os';
 $limit = 10;
 
-$queryClient = new Entities(HttpClient::getInstance());
+$queryClient = new Entities();
 
 $params = array("limit" => $limit, 'expression' => $expression, 'tags' => $tags );
 $responseEntities = $queryClient->findAll($params);
@@ -39,8 +39,6 @@ $entityTable = Utils::arrayAsHtmlTable(array($responseEntity), $viewConfig);
 
 $params = array("limit" => $limit);
 $responseMetrics = $queryClient->findMetrics($entity, $params);
-
-HttpClient::getInstance()->close();
 
 $viewConfig = new ViewConfiguration('Metrics for entity: ' . $entity, "metrics");
 $metricsTable = Utils::arrayAsHtmlTable($responseMetrics, $viewConfig);

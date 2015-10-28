@@ -22,7 +22,7 @@ require_once '../atsdPHP/Utils.php';
 $expression = 'name like \'nmon*\'';
 $limit = 10;
 
-$queryClient = new Metrics(HttpClient::getInstance());
+$queryClient = new Metrics();
 
 $params = array('limit' => $limit, 'expression' => $expression);
 $responseMetrics = $queryClient->findAll($params);
@@ -39,8 +39,6 @@ $viewConfig = new ViewConfiguration('Metric:' . $metric . ', entity: ' . $entity
 $eattableEntity = Utils::arrayAsHtmlTable(array($responseMetric), $viewConfig);
 
 $responseEntityAndTags = $queryClient->findEntityAndTags($metric);
-
-HttpClient::getInstance()->close();
 
 $viewConfig = new ViewConfiguration('Entity and Tags for metric: ' . $metric, 'entAndTags');
 $entityAndTagsTable = Utils::arrayAsHtmlTable($responseEntityAndTags, $viewConfig);

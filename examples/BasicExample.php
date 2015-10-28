@@ -22,11 +22,9 @@ require_once '../atsdPHP/Utils.php';
 $expression = 'name like \'nmon*\'';
 $limit = 10;
 
-$queryClient = new Metrics(HttpClient::getInstance());
+$queryClient = new Metrics();
 
 $params = array('limit' => $limit, 'expression' => $expression);
 $metricsResponse = $queryClient->findAll($params);
-
-HttpClient::getInstance()->close();
 
 var_dump($metricsResponse);

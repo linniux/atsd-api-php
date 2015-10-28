@@ -19,6 +19,9 @@ require_once '../atsdPHP/HttpClient.php';
 require_once '../atsdPHP/models/Series.php';
 require_once '../atsdPHP/models/Properties.php';
 class BasicApiProxy {
+
+    public function __construct() {
+    }
     protected function validateSeries($string) {
         return true;
     }
@@ -28,7 +31,7 @@ class BasicApiProxy {
     }
 
     public function seriesJsonQuery($string) {
-        $seriesClient = new Series(HttpClient::getInstance());
+        $seriesClient = new Series();
         if(!$this->validateSeries($string)) {
             return "";
         }
@@ -38,7 +41,7 @@ class BasicApiProxy {
     }
 
     public function propertiesJsonQuery($string) {
-        $propertiesClient = new Properties(HttpClient::getInstance());
+        $propertiesClient = new Properties();
         if(!$this->validateProperties($string)) {
             return "";
         }

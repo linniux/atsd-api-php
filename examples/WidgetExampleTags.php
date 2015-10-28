@@ -67,7 +67,7 @@ require_once '../atsdPHP/HttpClient.php';
         <th>value</th>
     </tr>
     <?php
-        $client = new Entities(HttpClient::getInstance());
+        $client = new Entities();
         $entityData = $client->find($_REQUEST['entity']);
         foreach($entityData['tags'] as $key => $value) {
             echo "<tr><td>" . $key . "</td><td>" . $value . "</td></tr>";

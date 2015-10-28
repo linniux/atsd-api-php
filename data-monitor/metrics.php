@@ -2,7 +2,7 @@
 namespace axibase\atsdPHP;
 require_once '../atsdPHP/HttpClient.php';
 require_once '../atsdPHP/models/Entities.php';
-$client = new Entities(HttpClient::getInstance());
+$client = new Entities();
 if (empty($_REQUEST['entity'])) {
     exit("Entity is not specified");
 }

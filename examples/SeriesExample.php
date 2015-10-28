@@ -20,15 +20,13 @@ require_once '../atsdPHP/HttpClient.php';
 require_once '../atsdPHP/Utils.php';
 require_once '../atsdPHP/Constants.php';
 
-$queryClient = new Series(HttpClient::getInstance());
+$queryClient = new Series();
 $queryClient->addDetailQuery('nurswgvml007', 'cpu_busy', 1424612226000, 1424612453000);
 
 $aggregator = new Aggregator(array(AggregateType::AVG), array("count" => 1, "unit" => TimeUnit::HOUR));
 $queryClient->addAggregateQuery('nurswgvml007', 'cpu_busy', 0, 1424612453000, $aggregator);
 $queryClient->addQuery("nurswgvml007", "cpu_busy", array("startTime" => 0, "endTime" => 1424612453000, "limit" => "4"));
 $response = $queryClient->execQueries();
-
-HttpClient::getInstance()->close();
 
 $tables = array();
 $tables[] = Utils::seriesAsHtml($response[0], "detail series");

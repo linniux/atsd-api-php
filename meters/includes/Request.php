@@ -62,7 +62,7 @@ class Request {
             exit("Can not find group for user " . $user);
         }
         $entities = array();
-        $entityGroups = new EntityGroups(HttpClient::getInstance());
+        $entityGroups = new EntityGroups();
         try {
             $response = $entityGroups->findEntities($userToGroup[$user]);
             foreach($response as $entity) {

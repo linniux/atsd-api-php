@@ -22,12 +22,10 @@ require_once '../atsdPHP/Utils.php';
 $entity = "awsswgvml001"; 
 $limit = 5;
 
-$queryClient = new AlertsHistory(HttpClient::getInstance());
+$queryClient = new AlertsHistory();
 
 $jsonObj = json_decode('{"queries": [{"entity": "' . $entity . '", "limit":"' . $limit . '"}]}');
 $response = $queryClient->findHistory($jsonObj);
-
-HttpClient::getInstance()->close();
 
 $viewConfig = new ViewConfiguration("Alerts history for entity: " . $entity . "; limit: " . $limit, "alertsHistory", array('severity' => 'severity', 'alertOpenTime' => 'unixtimestamp', 'receivedTime' => 'unixtimestamp', 'time' => 'unixtimestamp'));
 $tbl = Utils::arrayAsHtmlTable($response, $viewConfig);

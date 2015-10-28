@@ -21,12 +21,10 @@ require_once '../atsdPHP/Utils.php';
 
 $entity = "nurswgvml007";
 
-$queryClient = new Alerts(HttpClient::getInstance());
+$queryClient = new Alerts();
 
 $jsonObj = json_decode('{"queries": [{"entities": ["' . $entity . '"]}]}');
 $response = $queryClient->find($jsonObj);
-
-HttpClient::getInstance()->close();
 
 $viewConfig = new ViewConfiguration("Alerts for entity: " . $entity, "alerts", array('severity' => 'severity', 'openTime' => 'unixtimestamp', 'lastEventTime' => 'unixtimestamp'));
 $tbl = Utils::arrayAsHtmlTable($response, $viewConfig);

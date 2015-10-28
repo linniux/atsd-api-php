@@ -22,7 +22,7 @@ require_once '../atsdPHP/Utils.php';
 
 $limit = 8;
 
-$queryClient = new EntityGroups(HttpClient::getInstance());
+$queryClient = new EntityGroups();
 
 $params = array("limit" => $limit);
 $responseEntities = $queryClient->findAll($params);
@@ -37,8 +37,6 @@ $viewConfigGroup = new ViewConfiguration('Group: ' . $group, 'group');
 $groupsTable = Utils::arrayAsHtmlTable(array($responseGroup), $viewConfigGroup);
 
 $responseEntitiesForGroup = $queryClient->findEntities($group);
-
-HttpClient::getInstance()->close();
 
 $viewConfigEntities = new ViewConfiguration('Entities for group: ' . $group , 'entForGroup', array('lastInsertTime' => 'unixtimestamp'));
 $entitiesForGroupTable = Utils::arrayAsHtmlTable($responseEntitiesForGroup, $viewConfigEntities);

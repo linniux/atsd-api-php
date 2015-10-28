@@ -45,7 +45,7 @@ function export() {
 }
 
 function getCsv($entity, $metric, $endDate, $interval) {
-    $csv = new Csv(HttpClient::getInstance());
+    $csv = new Csv();
 
     $options = array();
     if($interval != '1-DAY') {
