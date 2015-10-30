@@ -32,6 +32,7 @@ class HttpClient
     public static function getInstance() {
         if (self::$instance == null) {
             self::$instance = new HttpClient();
+
         }
         return self::$instance;
     }
@@ -53,6 +54,10 @@ class HttpClient
         $this->curlHandler = curl_init();
         curl_setopt_array($this->curlHandler, self::$curlOpts);
         curl_setopt($this->curlHandler, CURLOPT_USERPWD, "$this->username:$this->password");
+        register_shutdown_function(function(){
+            curl_close($this->curlHandler);
+            $this->curlHandler = null;
+        });
     }
 
     public function query($uri, $postdata = null) {
@@ -82,11 +87,6 @@ class HttpClient
             }
         }
         return $response;
-    }
-
-    public function close() {
-        curl_close($this->curlHandler);
-        $this->curlHandler = null;
     }
 }
 

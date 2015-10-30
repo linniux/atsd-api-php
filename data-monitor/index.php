@@ -85,7 +85,5 @@ if (!empty($_REQUEST['group'])) {
     }
     ?>
 </table>
-
-
 </body>
 </html>
