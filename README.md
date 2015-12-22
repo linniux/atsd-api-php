@@ -173,7 +173,7 @@ $queryClient->addQuery("Entity1", "Metric1", array(
         "interpolate"=>"STEP"
     ),
     "rate"=>array(
-        "interval"=>array(
+        "period"=>array(
             "count"=>1,
             "unit"=>"HOUR"
         )
@@ -183,7 +183,7 @@ $queryClient->addQuery("Entity1", "Metric1", array(
             "AVG",
             "MAX"
         ),
-        "interval"=>array(
+        "period"=>array(
             "count"=>1,
             "unit"=>"HOUR"
         ),

@@ -33,8 +33,8 @@ function export() {
     if(array_key_exists('entities', $_SESSION) && in_array($entity, $_SESSION['entities'])) {
         $metric = $_REQUEST['metric'];
         $endDate = $_REQUEST['endDate'];
-        $interval = $_REQUEST['interval'];
-        $csv = getCsv($entity, $metric, $endDate, $interval);
+        $period = $_REQUEST['period'];
+        $csv = getCsv($entity, $metric, $endDate, $period);
         header("Content-type: text/csv; charset=UTF-8");
         header("Content-Disposition: attachment; filename=series.csv");
         echo $csv;
@@ -44,19 +44,19 @@ function export() {
     }
 }
 
-function getCsv($entity, $metric, $endDate, $interval) {
+function getCsv($entity, $metric, $endDate, $period) {
     $csv = new Csv();
 
     $options = array();
-    if($interval != '1-DAY') {
+    if($period != '1-DAY') {
         $options['a'] = array("SUM");
     }
-    if($interval == '1-WEEK') {
+    if($period == '1-WEEK') {
         $options['ai'] = '1-HOUR';
-    } else if ($interval == '1-MONTH') {
+    } else if ($period == '1-MONTH') {
         $options['ai'] = '1-DAY';
     }
-    $response = $csv->export($entity, $metric, $endDate, $interval, $options);
+    $response = $csv->export($entity, $metric, $endDate, $period, $options);
     return $response;
 }
 
@@ -71,8 +71,8 @@ function validateRequest() {
     if(!array_key_exists('endDate', $_REQUEST)) {
         $errorMsg .= "ERROR: endDate did not set.";
     }
-    if(!array_key_exists('interval', $_REQUEST)) {
-        $errorMsg .= "ERROR: interval did not set.";
+    if(!array_key_exists('period', $_REQUEST)) {
+        $errorMsg .= "ERROR: period did not set.";
     }
     return $errorMsg;
 }

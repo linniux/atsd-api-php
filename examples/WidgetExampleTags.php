@@ -7,11 +7,11 @@ require_once '../atsdPHP/HttpClient.php';
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <script type="text/javascript" src="https://axibase.com/atsd/portalFiddle/portal/JavaScript/d3.min.js"></script>
-    <script type="text/javascript" src="https://axibase.com/atsd/portalFiddle/portal/JavaScript/portal_init.js"></script>
-    <script type="text/javascript" src="https://lab.axibase.com/chartlab/portal/JavaScript/charts.min.js"></script>
-    <script type="text/javascript" src="https://lab.axibase.com/chartlab/portal/JavaScript/initialize.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://lab.axibase.com/chartlab/portal/CSS/charts.min.css"/>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+    <script type="text/javascript" src="//apps.axibase.com/chartlab/portal/JavaScript/portal_init.js"></script>
+    <script type="text/javascript" src="//apps.axibase.com/chartlab/portal/JavaScript/charts.min.js"></script>
+    <script type="text/javascript" src="//apps.axibase.com/chartlab/portal/JavaScript/initialize.js"></script>
+    <link rel="stylesheet" type="text/css" href="//apps.axibase.com/chartlab/portal/CSS/charts.min.css"/>
 
     <style>
         #widget-0 {

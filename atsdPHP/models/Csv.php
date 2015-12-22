@@ -21,12 +21,12 @@ class Csv  extends AtsdClient {
     const EXPORT_URI = "/export?";
     protected $queryUri;
 
-    public function export($entity, $metric, $endDate, $interval, $optional = array() ) {
+    public function export($entity, $metric, $endDate, $period, $optional = array() ) {
         $this->postParams = array();
         $this->postParams['e'] = $entity;
         $this->postParams['m'] = $metric;
         $this->postParams['t'] = 'HISTORY';
-        $this->postParams['si'] = $interval;
+        $this->postParams['si'] = $period;
         $this->postParams['et'] = $endDate;
         $this->postParams['f'] = 'CSV';
         foreach($optional as $key => $value) {

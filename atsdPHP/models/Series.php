@@ -86,15 +86,15 @@ class Series extends AtsdClient {
 
 class Aggregator {
     public $types;
-    public $interval;
+    public $period;
     public $interpolate;
     public $threshold;
     public $calendar;
     public $workingMinutes;
 
-    function __construct($types, $interval, $interpolate = "", $threshold = "", $calendar = "", $workingMinutes = "") {
+    function __construct($types, $period, $interpolate = "", $threshold = "", $calendar = "", $workingMinutes = "") {
         $this->types = $types;
-        $this->interval = $interval;
+        $this->period = $period;
         $this->interpolate = $interpolate;
         $this->threshold = $threshold;
         $this->calendar = $calendar;
